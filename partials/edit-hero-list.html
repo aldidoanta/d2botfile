@@ -1,0 +1,25 @@
+<!-- edit-hero-list.html -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <!-- search sidebar -->
+      <div class="form-group">
+        <div>
+          Search: <input ng-model="query" placeholder="Search Hero">
+        </div>
+      </div>
+
+      <ul class="heroes list-group">
+        <li class="list-group-item" ng-repeat="hero in heroes | filter:query | orderBy:orderProp">
+          <a href="#/edit/{{hero.id}}"><span style="color:#000000">{{hero.displayname}}</span></a>
+        </li>
+      </ul>
+
+    </div>
+    <div class="col-md-9" align="center" ng-switch on="heroId || 'null'">
+      <!--edit-hero-detail body content-->
+      <div ng-switch-when="null">Select the hero you want to edit from the list on the left side</div>
+      <div ng-switch-default><div ng-include="'partials/edit-hero-detail.html'"></div></div>
+    </div>
+  </div>
+</div>
