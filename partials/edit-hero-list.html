@@ -11,7 +11,7 @@
 
       <ul class="heroes list-group">
         <li class="list-group-item" ng-repeat="hero in heroes | filter:query | orderBy:orderProp">
-          <a href="#/edit/{{hero.id}}"><span style="color:#000000">{{hero.displayname}}</span></a>
+          <a href="#/edit/{{hero.id}}"><span style="color:#000000">{{hero.localized_name}}</span></a>
         </li>
       </ul>
 
