@@ -1,4 +1,40 @@
 <!-- edit-hero-detail.html -->
-<div align="center">
-	View for editing Hero ID <span>{{heroId}}</span>
+<div>
+	<span>View for editing Hero {{hero.localized_name}}</span>
+</div>
+<div>
+	<span>Item Loadout</span>
+	<ul>
+		<li>Consumables</li>
+		<li>Core</li>
+		<li>Extension</li>
+		<li>Luxury</li>
+	</ul>
+	<!-- <ul class="items list-group">
+        <li class="list-group-item" ng-repeat="item in items | orderObjectBy:'dname'">
+          <span style="color:#000000">{{item.dname}}</span>
+        </li>
+    </ul> -->
+    <!-- <ul class="abilites list-group">
+        <li class="list-group-abilities" ng-repeat="ability in abilities | orderObjectBy:'dname'">
+          <span style="color:#000000">{{ability.dname}}</span>
+        </li>
+    </ul> -->
+</div>
+<div>
+	<span>Ability Build</span>
+	<ul>
+		<li>{{abilities[hero.abilities[0]].dname}}</li>
+		<li>{{abilities[hero.abilities[1]].dname}}</li>
+		<li>{{abilities[hero.abilities[2]].dname}}</li>
+		<li>{{abilities[hero.abilities[3]].dname}}</li>
+		<!-- attribute_bonus is not available for Invoker (heroIdx 72)-->
+		<li ng-hide="heroIdx == 72">Attribute Bonus</li>
+	</ul>
+</div>
+<div>
+	<span>Role/Hero Type</span>
+</div>
+<div>
+	<span>Laning Info</span>
 </div>

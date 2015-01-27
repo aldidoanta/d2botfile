@@ -4,7 +4,9 @@
 
 var d2botfileApp = angular.module('d2botfileApp', [
   'ngRoute',
-  'd2botfileControllers'
+  'd2botfileControllers',
+  'd2botfileFilters',
+  'd2botfileServices'
 ]);
 
 d2botfileApp.config(['$routeProvider',
@@ -15,11 +17,11 @@ d2botfileApp.config(['$routeProvider',
       }).
       when('/edit', {
         templateUrl: 'partials/edit-hero-list.html',
-        controller: 'EditHeroListController'
+        controller: 'EditHeroController'
       }).
-      when('/edit/:heroId', {
+      when('/edit/:heroIdx', {
         templateUrl: 'partials/edit-hero-list.html',
-        controller: 'EditHeroListController'
+        controller: 'EditHeroController'
       }).
       when('/download', {
         templateUrl: 'partials/download.html'
