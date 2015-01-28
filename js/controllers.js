@@ -4,7 +4,7 @@
 
 var d2botfileControllers = angular.module('d2botfileControllers', []);
 
-d2botfileControllers.controller('EditHeroController', ['$scope', '$routeParams', 'heroFactory', 'itemFactory', 'abilityFactory', function($scope, $routeParams, heroFactory, itemFactory, abilityFactory) {
+d2botfileControllers.controller('EditHeroController', ['$scope', '$routeParams', 'heroFactory', 'itemFactory', 'abilityFactory', 'botfileFactory', function($scope, $routeParams, heroFactory, itemFactory, abilityFactory, botfileFactory) {
   //get hero data
   heroFactory.get(function(data){
     $scope.heroes = data.heroes;
