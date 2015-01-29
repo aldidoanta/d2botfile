@@ -23,14 +23,30 @@
 </div>
 <div>
 	<span>Ability Build</span>
-	<ul>
-		<li>{{abilities[hero.abilities[0]].dname}}</li>
-		<li>{{abilities[hero.abilities[1]].dname}}</li>
-		<li>{{abilities[hero.abilities[2]].dname}}</li>
-		<li>{{abilities[hero.abilities[3]].dname}}</li>
-		<!-- attribute_bonus is not available for Invoker (heroIdx 72)-->
-		<li ng-hide="heroIdx == 72">Attribute Bonus</li>
-	</ul>
+	<div>
+		<div ng-repeat="abilityIdx in range(abilityNumber) track by $index">
+			<span>{{abilities[hero.abilities[$index]].dname}}</span>
+			<table class="abilityTable">
+				<tbody>
+					<tr>
+						<td class="abilityIcon" align="center">img</td>
+						<td ng-repeat="levelIdx in range(levelNumber) track by $index" ng-click="selected = !selected" ng-class="{'selected': selected}" id="a{{$parent.$index+1}}lv{{$index+1}}" class = "abilityCell">{{$index+1}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div ng-hide="heroIdx == 72"> <!--not available for Invoker (heroIdx 72)-->
+			<span>Attribute Bonus</span>
+			<table class="abilityTable">
+				<tbody>
+					<tr>
+						<td class="abilityIcon" align="center">img</td>
+						<td ng-repeat="levelIdx in range(levelNumber) track by $index" ng-click="selected = !selected" ng-class="{'selected': selected}" id="a5lv{{$index+1}}" class = "abilityCell">{{$index+1}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
 <div>
 	<span>Role/Hero Type</span>
@@ -38,3 +54,4 @@
 <div>
 	<span>Laning Info</span>
 </div>
+<button ng-click="setBotfileConfig()">Save</button>

@@ -31,11 +31,41 @@ d2botfileServices.factory('botfileFactory', ['heroFactory', function(heroFactory
 
       				},
       				"Build": {
-
+      					"1": "",
+      					"2": "",
+      					"3": "",
+      					"4": "",
+      					"5": "",
+      					"6": "",
+      					"7": "",
+      					"8": "",
+      					"9": "",
+      					"10": "",
+      					"11": "",
+      					"12": "",
+      					"13": "",
+      					"14": "",
+      					"15": "",
+      					"16": "",
+      					"17": "",
+      					"18": "",
+      					"19": "",
+      					"20": "",
+      					"21": "",
+      					"22": "",
+      					"23": "",
+      					"24": "",
+      					"25": ""
       				},
       				"HeroType": "",
       				"LaningInfo": {
-
+      					"SoloDesire": "",
+						"RequiresBabysit": "",
+						"ProvidesBabysit": "",
+						"SurvivalRating": "",
+						"RequiresFarm": "",
+						"ProvidesSetup": "",
+						"RequiresSetup": ""
       				}
       			}
       		};
@@ -50,7 +80,7 @@ d2botfileServices.factory('botfileFactory', ['heroFactory', function(heroFactory
 			botfileConfig[hero_name].Bot.Loadout = data;
 			return botfileConfig;
 		},
-		setBotfileBuild : function(hero_name, data){
+		setBotBuild : function(hero_name, data){
 			botfileConfig[hero_name].Bot.Build = data;
 			return botfileConfig;
 		},

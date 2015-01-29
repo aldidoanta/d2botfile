@@ -10,6 +10,26 @@ body {
   overflow-y: auto;
 }
 
+.abilityTable {
+  border: 1px solid black;
+  table-layout: fixed;
+  width: 70%;
+}
+
+.abilityCell {
+  border: 1px solid black;
+  overflow: hidden;
+}
+
+.abilityIcon {
+  border: 1px solid black;
+  width: 64px;
+}
+
+.selected {
+	background-color: #0044cc;
+}
+
 .thumb {
   float: left;
   margin: -0.5em 1em 1.5em 0;
