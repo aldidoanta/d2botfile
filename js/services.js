@@ -27,36 +27,8 @@ d2botfileServices.factory('botfileFactory', ['heroFactory', function(heroFactory
       	botfileConfig[heroes[i].name] =
       		{
       			"Bot": {
-      				"Loadout": {
-
-      				},
-      				"Build": {
-      					"1": "",
-      					"2": "",
-      					"3": "",
-      					"4": "",
-      					"5": "",
-      					"6": "",
-      					"7": "",
-      					"8": "",
-      					"9": "",
-      					"10": "",
-      					"11": "",
-      					"12": "",
-      					"13": "",
-      					"14": "",
-      					"15": "",
-      					"16": "",
-      					"17": "",
-      					"18": "",
-      					"19": "",
-      					"20": "",
-      					"21": "",
-      					"22": "",
-      					"23": "",
-      					"24": "",
-      					"25": ""
-      				},
+      				"Loadout": {},
+      				"Build": {},
       				"HeroType": "",
       				"LaningInfo": {
       					"SoloDesire": "",
@@ -75,6 +47,18 @@ d2botfileServices.factory('botfileFactory', ['heroFactory', function(heroFactory
 	return {
 		getBotfileConfig : function(){
 			return botfileConfig;
+		},
+		getBotLoadout : function(hero_name){
+			return botfileConfig[hero_name].Bot.Loadout;
+		},
+		getBotBuild : function(hero_name){
+			return botfileConfig[hero_name].Bot.Build;
+		},
+		getBotHeroType : function(hero_name){
+			return botfileConfig[hero_name].Bot.HeroType;;
+		},
+		getBotLaningInfo : function(hero_name){
+			return botfileConfig[hero_name].Bot.LaningInfo;
 		},
 		setBotLoadout : function(hero_name, data){
 			botfileConfig[hero_name].Bot.Loadout = data;

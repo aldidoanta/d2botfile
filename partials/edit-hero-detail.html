@@ -10,16 +10,7 @@
 		<li>Extension</li>
 		<li>Luxury</li>
 	</ul>
-	<!-- <ul class="items list-group">
-        <li class="list-group-item" ng-repeat="item in items | orderObjectBy:'dname'">
-          <span style="color:#000000">{{item.dname}}</span>
-        </li>
-    </ul> -->
-    <!-- <ul class="abilites list-group">
-        <li class="list-group-abilities" ng-repeat="ability in abilities | orderObjectBy:'dname'">
-          <span style="color:#000000">{{ability.dname}}</span>
-        </li>
-    </ul> -->
+	
 </div>
 <div>
 	<span>Ability Build</span>
@@ -35,7 +26,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div ng-hide="heroIdx == 72"> <!--not available for Invoker (heroIdx 72)-->
+		<div ng-hide="heroIdx == invokerHeroIdx"> <!--not available for Invoker (heroIdx 72)-->
 			<span>Attribute Bonus</span>
 			<table class="abilityTable">
 				<tbody>
@@ -54,4 +45,3 @@
 <div>
 	<span>Laning Info</span>
 </div>
-<button ng-click="setBotfileConfig()">Save</button>
