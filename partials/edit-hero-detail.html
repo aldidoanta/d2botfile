@@ -41,6 +41,9 @@
 </div>
 <div>
 	<span>Role/Hero Type</span>
+	<div ng-repeat="role in heroRole track by $index">
+    	<input type="checkbox" id="role{{$index}}" value="{{role}}">{{role.substring(9,role.length).replace("_"," ")}}<br/>
+	</div>
 </div>
 <div>
 	<span>Laning Info</span>

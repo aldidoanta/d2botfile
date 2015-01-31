@@ -11,10 +11,22 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
   $scope.orderItem = 'value.dname';
   $scope.orderAbility = 'value.dname';
   $scope.heroIdx = $routeParams.heroIdx;
+
   $scope.invokerHeroIdx = 72; 
   $scope.abilityNumber = 4;
   $scope.levelNumber = 25;
   $scope.selected = false;
+
+  $scope.heroRole = [
+    "DOTA_BOT_HARD_CARRY",
+    "DOTA_BOT_SEMI_CARRY",
+    "DOTA_BOT_NUKER",
+    "DOTA_BOT_GANKER",
+    "DOTA_BOT_TANK",
+    "DOTA_BOT_PUSH_SUPPORT",
+    "DOTA_BOT_STUN_SUPPORT",
+    "DOTA_BOT_PURE_SUPPORT",
+  ];
 
   //scope functions
   $scope.init = function(){
@@ -41,6 +53,7 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
   };
 
   $scope.getBotfileConfigHero = function(hero_name){
+
     //TODO load "Loadout"
 
     //load "Build"
@@ -66,10 +79,19 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
               break;
         }
       } 
-
-      //TODO load "HeroType"
-      //TODO load "LaningInfo"
     }
+
+    //load "HeroType"
+    var heroType = botfileFactory.getBotHeroType(hero_name);
+    if(heroType != ""){
+      var roles = heroType.split(" | ");
+      roles.forEach(function(role){
+        document.getElementById("role"+$scope.heroRole.indexOf(role)).checked = true;
+      });
+    }
+
+    //TODO load "LaningInfo"
+
   };
 
   //save current bot config
@@ -99,7 +121,21 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     }
     botfileFactory.setBotBuild(hero_name,build);
 
-    //TODO save "HeroType"
+    //save "HeroType"
+    var heroType = "";
+    for(var i = 0; i < $scope.heroRole.length; i++){
+      if(document.getElementById("role"+i).checked == true){
+        if(heroType == ""){
+          heroType += $scope.heroRole[i];
+        }
+        else{
+          heroType += " | "+$scope.heroRole[i];
+        }
+      }
+    }
+    botfileFactory.setBotHeroType(hero_name,heroType);
+
+
     //TODO save "LaningInfo"
   };
 
