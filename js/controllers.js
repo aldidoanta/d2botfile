@@ -27,6 +27,15 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     "DOTA_BOT_STUN_SUPPORT",
     "DOTA_BOT_PURE_SUPPORT",
   ];
+  $scope.laningInfo = [
+    "SoloDesire",
+    "RequiresBabysit",
+    "ProvidesBabysit",
+    "SurvivalRating",
+    "RequiresFarm",
+    "ProvidesSetup",
+    "RequiresSetup"
+  ];
 
   //scope functions
   $scope.init = function(){
@@ -50,6 +59,14 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
 
   $scope.range = function(num){
     return new Array(num);
+  };
+
+  $scope.splitCamelCase = function(str){
+    var newString = "";
+    newString =  str.replace(/([A-Z])/g, ' $1').replace(/^./, function(str){
+                    return str.toUpperCase();
+                  });
+    return newString;
   };
 
   $scope.getBotfileConfigHero = function(hero_name){
@@ -90,7 +107,13 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
       });
     }
 
-    //TODO load "LaningInfo"
+    //load "LaningInfo"
+    var laningInfo = botfileFactory.getBotLaningInfo(hero_name);
+    for(var item in laningInfo){
+      if(laningInfo.hasOwnProperty(item)){
+          document.getElementById("laning_"+item).value = parseInt(laningInfo[item]);
+      }
+    }
 
   };
 
@@ -135,8 +158,12 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     }
     botfileFactory.setBotHeroType(hero_name,heroType);
 
-
-    //TODO save "LaningInfo"
+    //save "LaningInfo"
+    var laningInfo = {};
+    for(var i = 0; i < $scope.laningInfo.length; i++){
+      laningInfo[$scope.laningInfo[i]] = String(document.getElementById("laning_"+$scope.laningInfo[i]).value);
+    }
+    botfileFactory.setBotLaningInfo(hero_name,laningInfo);
   };
 
   //events

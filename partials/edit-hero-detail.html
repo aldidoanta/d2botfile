@@ -46,5 +46,9 @@
 	</div>
 </div>
 <div>
-	<span>Laning Info</span>
+	<span>Laning Info</span><br/>
+	<span>Use non-negative integers (0, 1, 2, 3, ...)</span>
+	<div ng-repeat="item in laningInfo track by $index">
+		{{splitCamelCase(laningInfo[$index])}}: <input type="number" id="laning_{{laningInfo[$index]}}" min="0" value="0"><br/>
+	</div>
 </div>

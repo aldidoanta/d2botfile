@@ -30,15 +30,7 @@ d2botfileServices.factory('botfileFactory', ['heroFactory', function(heroFactory
       				"Loadout": {},
       				"Build": {},
       				"HeroType": "",
-      				"LaningInfo": {
-      					"SoloDesire": "",
-						"RequiresBabysit": "",
-						"ProvidesBabysit": "",
-						"SurvivalRating": "",
-						"RequiresFarm": "",
-						"ProvidesSetup": "",
-						"RequiresSetup": ""
-      				}
+      				"LaningInfo": {}
       			}
       		};
       }
