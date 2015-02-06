@@ -20,7 +20,9 @@
 			<table class="abilityTable">
 				<tbody>
 					<tr>
-						<td class="abilityIcon" align="center">img</td>
+						<td class="abilityIcon" align="center">
+							<img ng-src="http://cdn.dota2.com/apps/dota2/images/abilities/{{hero.abilities[$index]}}_md.png">
+						</td>
 						<td ng-repeat="levelIdx in range(levelNumber) track by $index" ng-click="selected = !selected" ng-class="{'selected': selected}" id="a{{$parent.$index+1}}lv{{$index+1}}" class = "abilityCell">{{$index+1}}</td>
 					</tr>
 				</tbody>
@@ -31,7 +33,9 @@
 			<table class="abilityTable">
 				<tbody>
 					<tr>
-						<td class="abilityIcon" align="center">img</td>
+						<td class="abilityIcon" align="center">
+							<img ng-src="http://cdn.dota2.com/apps/dota2/images//workshop/itembuilder/stats.png" height='64' width='64'>
+						</td>
 						<td ng-repeat="levelIdx in range(levelNumber) track by $index" ng-click="selected = !selected" ng-class="{'selected': selected}" id="a5lv{{$index+1}}" class = "abilityCell">{{$index+1}}</td>
 					</tr>
 				</tbody>
