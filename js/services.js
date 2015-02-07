@@ -12,6 +12,10 @@ d2botfileServices.factory('itemFactory', ['$resource', function($resource){
 	return $resource('data/items.json');
 }]);
 
+d2botfileServices.factory('itemgroupFactory', ['$resource', function($resource){
+	return $resource('data/items_group.json');
+}]);
+
 d2botfileServices.factory('abilityFactory', ['$resource', function($resource){
 	return $resource('data/abilities.json');
 }]);

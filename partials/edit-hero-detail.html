@@ -10,6 +10,18 @@
 		<li>Extension</li>
 		<li>Luxury</li>
 	</ul>
+
+	<div class="itemPanel">
+		<!-- row 1: item type icon -->
+		<div class="itemcat" ng-repeat="itemgroup in itemgroups">
+			<div class="itemcatIcon">
+				<img ng-src="img/itemcat/{{itemgroup.name}}.png" width="51" height="51" title="{{itemgroup.name}}">
+			</div>
+			<div class="itemIcon" ng-repeat="item in itemgroup.items">
+				<img ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{item}}" height="39px" width="51px">
+			</div>
+		</div>
+	</div>
 	
 </div>
 <div>
@@ -34,7 +46,7 @@
 				<tbody>
 					<tr>
 						<td class="abilityIcon" align="center">
-							<img ng-src="http://cdn.dota2.com/apps/dota2/images//workshop/itembuilder/stats.png" height='64' width='64'>
+							<img ng-src="http://cdn.dota2.com/apps/dota2/images/workshop/itembuilder/stats.png" height='64' width='64'>
 						</td>
 						<td ng-repeat="levelIdx in range(levelNumber) track by $index" ng-click="selected = !selected" ng-class="{'selected': selected}" id="a5lv{{$index+1}}" class = "abilityCell">{{$index+1}}</td>
 					</tr>

@@ -1,0 +1,188 @@
+{
+    "itemdata_group": [
+        {
+            "name": "Consumables",
+            "items": [
+                "clarity",
+                "tango",
+                "flask",
+                "smoke_of_deceit",
+                "tpscroll",
+                "dust",
+                "courier",
+                "flying_courier",
+                "ward_observer",
+                "ward_sentry",
+                "bottle"
+            ]
+        },
+        {
+            "name": "Attributes",
+            "items": [
+                "branches",
+                "gauntlets",
+                "slippers",
+                "mantle",
+                "circlet",
+                "belt_of_strength",
+                "boots_of_elves",
+                "robe",
+                "ogre_axe",
+                "blade_of_alacrity",
+                "staff_of_wizardry",
+                "ultimate_orb"
+            ]
+        },
+        {
+            "name": "Armaments",
+            "items": [
+                "ring_of_protection",
+                "quelling_blade",
+                "stout_shield",
+                "blades_of_attack",
+                "chainmail",
+                "helm_of_iron_will",
+                "broadsword",
+                "quarterstaff",
+                "claymore",
+                "javelin",
+                "platemail",
+                "mithril_hammer"
+            ]
+        },
+        {
+            "name": "Arcane",
+            "items": [
+                "magic_stick",
+                "sobi_mask",
+                "ring_of_regen",
+                "boots",
+                "gloves",
+                "cloak",
+                "gem",
+                "lifesteal",
+                "ghost",
+                "talisman_of_evasion",
+                "blink",
+                "shadow_amulet"
+            ]
+        },
+        {
+            "name": "Common",
+            "items": [
+                "wraith_band",
+                "null_talisman",
+                "magic_wand",
+                "bracer",
+                "poor_mans_shield",
+                "soul_ring",
+                "phase_boots",
+                "power_treads",
+                "oblivion_staff",
+                "pers",
+                "hand_of_midas",
+                "travel_boots"
+            ]
+        },
+        {
+            "name": "Support",
+            "items": [
+                "ring_of_basilius",
+                "headdress",
+                "buckler",
+                "urn_of_shadows",
+                "ring_of_aquila",
+                "tranquil_boots",
+                "medallion_of_courage",
+                "arcane_boots",
+                "ancient_janggo",
+                "vladmir",
+                "mekansm",
+                "pipe"
+            ]
+        },
+        {
+            "name": "Caster",
+            "items": [
+                "force_staff",
+                "necronomicon",
+                "cyclone",
+                "dagon",
+                "veil_of_discord",
+                "rod_of_atos",
+                "ultimate_scepter",
+                "orchid",
+                "refresher",
+                "sheepstick"
+            ]
+        },
+        {
+            "name": "Weapons",
+            "items": [
+                "lesser_crit",
+                "armlet",
+                "basher",
+                "invis_sword",
+                "bfury",
+                "ethereal_blade",
+                "radiance",
+                "monkey_king_bar",
+                "greater_crit",
+                "butterfly",
+                "rapier",
+                "abyssal_blade"
+            ]
+        },
+        {
+            "name": "Armor",
+            "items": [
+                "hood_of_defiance",
+                "blade_mail",
+                "vanguard",
+                "soul_booster",
+                "black_king_bar",
+                "shivas_guard",
+                "manta",
+                "bloodstone",
+                "sphere",
+                "assault",
+                "heart",
+                "crimson_guard"
+            ]
+        },
+        {
+            "name": "Artifacts",
+            "items": [
+                "helm_of_the_dominator",
+                "mask_of_madness",
+                "sange",
+                "yasha",
+                "maelstrom",
+                "diffusal_blade",
+                "desolator",
+                "heavens_halberd",
+                "sange_and_yasha",
+                "mjollnir",
+                "skadi",
+                "satanic"
+            ]
+        },
+        {
+            "name": "Secret Shop",
+            "items": [
+                "orb_of_venom",
+                "ring_of_health",
+                "void_stone",
+                "energy_booster",
+                "vitality_booster",
+                "point_booster",
+                "hyperstone",
+                "demon_edge",
+                "mystic_staff",
+                "reaver",
+                "eagle",
+                "relic"
+            ]
+        }
+    ]
+}

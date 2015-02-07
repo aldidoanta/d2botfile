@@ -26,6 +26,21 @@ body {
   width: 64px;
 }
 
+.itemPanel{
+  width:auto;
+  position: relative;
+}
+
+.itemcat{
+  display:inline-block;
+  vertical-align: top;
+  width: 55px;
+}
+
+.itemcatIcon{
+  padding-bottom: 5px;
+}
+
 .selected {
 	background-color: #0044cc;
 }

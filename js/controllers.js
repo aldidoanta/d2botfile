@@ -4,7 +4,7 @@
 
 var d2botfileControllers = angular.module('d2botfileControllers', []);
 
-d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$routeParams', 'heroFactory', 'itemFactory', 'abilityFactory', 'botfileFactory', function($rootScope, $scope, $routeParams, heroFactory, itemFactory, abilityFactory, botfileFactory) {
+d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$routeParams', 'heroFactory', 'itemFactory', 'itemgroupFactory','abilityFactory', 'botfileFactory', function($rootScope, $scope, $routeParams, heroFactory, itemFactory, itemgroupFactory, abilityFactory, botfileFactory) {
 
   //other scope variables
   $scope.orderHero = 'localized_name';
@@ -50,6 +50,10 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     //get item data
     itemFactory.get(function(data) {
       $scope.items = data.itemdata;
+    });
+    //get item_group data
+    itemgroupFactory.get(function(data) {
+      $scope.itemgroups = data.itemdata_group;
     });
     //get ability data
     abilityFactory.get(function(data) {
