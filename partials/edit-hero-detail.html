@@ -12,13 +12,29 @@
 	</ul>
 
 	<div class="itemPanel">
-		<!-- row 1: item type icon -->
+		<div class="itemPriorityContainer">
+			ITEM_CONSUMABLES
+			<div class="itemPriority">
+				<div class="itemPriorityTarget" ondragover="allowDrop(event)" ondrop="dropCopy(event)">
+
+				</div>
+				<div class="itemPriorityTarget" ondragover="allowDrop(event)" ondrop="dropCopy(event)">
+
+				</div>
+			</div>
+			ITEM_CORE
+			<div class="itemPriority"></div>
+			ITEM_EXTENSION
+			<div class="itemPriority"></div>
+			ITEM_LUXURY
+			<div class="itemPriority"></div>
+		</div>
 		<div class="itemcat" ng-repeat="itemgroup in itemgroups">
 			<div class="itemcatIcon">
 				<img ng-src="img/itemcat/{{itemgroup.name}}.png" width="51" height="51" title="{{itemgroup.name}}">
 			</div>
 			<div class="itemIcon" ng-repeat="item in itemgroup.items">
-				<img ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{item}}" height="39px" width="51px">
+				<img ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" id="{{item}}" draggable="true" ondragstart="drag(event)" height="39px" width="51px">
 			</div>
 		</div>
 	</div>

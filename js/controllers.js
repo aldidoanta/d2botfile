@@ -61,10 +61,12 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     });
   };
 
+  //used in ng-repeat to repeat a defined number of times
   $scope.range = function(num){
     return new Array(num);
   };
 
+  //convert string to Camel Case
   $scope.splitCamelCase = function(str){
     var newString = "";
     newString =  str.replace(/([A-Z])/g, ' $1').replace(/^./, function(str){
@@ -73,6 +75,7 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     return newString;
   };
 
+  //load last saved bot config
   $scope.getBotfileConfigHero = function(hero_name){
 
     //TODO load "Loadout"
@@ -180,3 +183,31 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
   //fire init function
   $scope.init();
 }]);
+
+
+//used for drag and drop
+function allowDrop(ev){
+  ev.preventDefault();
+}
+
+function drag(ev){
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev){
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+}
+
+function dropCopy(ev){
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("Text");
+  var copy = document.createElement("img");
+  var original = document.getElementById(data);
+  copy.src = original.src;
+  copy.width = original.width;
+  copy.height = original.height;
+  copy.title = original.title;
+  ev.target.appendChild(copy);
+}

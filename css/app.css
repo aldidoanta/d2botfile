@@ -41,6 +41,23 @@ body {
   padding-bottom: 5px;
 }
 
+.itemPriority{
+  border: 1px solid black;
+  vertical-align: top;
+}
+
+.itemPriorityContainer{
+  display:inline-block;
+}
+
+.itemPriorityTarget{
+  display:inline-block;
+  vertical-align: top;
+  border: 1px solid black;
+  height: 39px;
+  width: 51px;
+}
+
 .selected {
 	background-color: #0044cc;
 }
