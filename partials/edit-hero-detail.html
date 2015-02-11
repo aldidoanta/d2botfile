@@ -4,37 +4,33 @@
 </div>
 <div>
 	<span>Item Loadout</span>
-	<ul>
-		<li>Consumables</li>
-		<li>Core</li>
-		<li>Extension</li>
-		<li>Luxury</li>
-	</ul>
 
 	<div class="itemPanel">
 		<div class="itemPriorityContainer">
 			ITEM_CONSUMABLES
-			<div class="itemPriority">
-				<div class="itemPriorityTarget" ondragover="allowDrop(event)" ondrop="dropCopy(event)">
-
-				</div>
-				<div class="itemPriorityTarget" ondragover="allowDrop(event)" ondrop="dropCopy(event)">
-
-				</div>
+			<div class="itemPriority" id="ITEM_CONSUMABLES" ng-sortable="{group:{name:'itemBuild', pull:true, put:true}, animation:100}">
+				<img class="itemPriorityIcon" ng-repeat="item in item_consumables track by $index" id="{{item}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" height="39px" width="51px">
 			</div>
 			ITEM_CORE
-			<div class="itemPriority"></div>
+			<div class="itemPriority" id="ITEM_CORE" ng-sortable="{group:{name:'itemBuild', pull:true, put:true}, animation:100}">
+				<img class="itemPriorityIcon" ng-repeat="item in item_core track by $index" id="{{item}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" height="39px" width="51px">	
+			</div>
 			ITEM_EXTENSION
-			<div class="itemPriority"></div>
+			<div class="itemPriority" id="ITEM_EXTENSION" ng-sortable="{group:{name:'itemBuild', pull:true, put:true}, animation:100}">
+				<img class="itemPriorityIcon" ng-repeat="item in item_extension track by $index" id="{{item}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" height="39px" width="51px">	
+			</div>
 			ITEM_LUXURY
-			<div class="itemPriority"></div>
+			<div class="itemPriority" id="ITEM_LUXURY" ng-sortable="{group:{name:'itemBuild', pull:true, put:true}, animation:100}">
+				<img class="itemPriorityIcon" ng-repeat="item in item_luxury track by $index" id="{{item}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" height="39px" width="51px">
+			</div>
 		</div>
 		<div class="itemcat" ng-repeat="itemgroup in itemgroups">
 			<div class="itemcatIcon">
 				<img ng-src="img/itemcat/{{itemgroup.name}}.png" width="51" height="51" title="{{itemgroup.name}}">
 			</div>
-			<div class="itemIcon" ng-repeat="item in itemgroup.items">
-				<img ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" id="{{item}}" draggable="true" ondragstart="drag(event)" height="39px" width="51px">
+			<div class="itemIcon" id="itemIconList" ng-sortable="{group:{name:'itemBuild', pull:'clone', put:false}, sort: false, animation:150}">
+				<img ng-repeat="item in itemgroup.items track by $index" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" id="{{item}}" height="39px" width="51px">
+				<!-- <div ng-repeat="item in itemgroup.items">{{item}}</div> -->
 			</div>
 		</div>
 	</div>

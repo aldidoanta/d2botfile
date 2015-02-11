@@ -17,6 +17,11 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
   $scope.levelNumber = 25;
   $scope.selected = false;
 
+  $scope.item_consumables = [];
+  $scope.item_core = [];
+  $scope.item_extension = [];
+  $scope.item_luxury = [];
+
   $scope.heroRole = [
     "DOTA_BOT_HARD_CARRY",
     "DOTA_BOT_SEMI_CARRY",
@@ -78,7 +83,14 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
   //load last saved bot config
   $scope.getBotfileConfigHero = function(hero_name){
 
-    //TODO load "Loadout"
+    //load "Loadout"
+    var loadout = botfileFactory.getBotLoadout(hero_name);
+    if(loadout.length > 0){
+      $scope.item_consumables = loadout[0].items;
+      $scope.item_core = loadout[1].items;
+      $scope.item_extension = loadout[2].items;
+      $scope.item_luxury = loadout[3].items;
+    }
 
     //load "Build"
     var build = botfileFactory.getBotBuild(hero_name);
@@ -127,7 +139,35 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
   //save current bot config
   $scope.setBotfileConfigHero = function(hero_name){
 
-    //TODO save "Loadout"
+    //save "Loadout"
+    var loadout = [
+      {
+        "name": "ITEM_CONSUMABLES",
+        "items": []
+      },
+      {
+        "name": "ITEM_CORE",
+        "items": []
+      },
+      {
+        "name": "ITEM_EXTENSION",
+        "items": []
+      },
+      {
+        "name": "ITEM_LUXURY",
+        "items": []
+      },
+    ];
+    for (var i = 0; i < loadout.length; i++) {
+      var items = document.getElementById(loadout[i].name).childNodes;
+      for (var j = 0; j < items.length; j++) {
+        if(items[j].tagName != undefined){
+          loadout[i].items.push(items[j].id);
+        }
+      }
+    }
+    botfileFactory.setBotLoadout(hero_name,loadout);
+
 
     //save "Build"
     var build = {};
@@ -183,31 +223,3 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
   //fire init function
   $scope.init();
 }]);
-
-
-//used for drag and drop
-function allowDrop(ev){
-  ev.preventDefault();
-}
-
-function drag(ev){
-  ev.dataTransfer.setData("text", ev.target.id);
-}
-
-function drop(ev){
-  ev.preventDefault();
-  var data = ev.dataTransfer.getData("text");
-  ev.target.appendChild(document.getElementById(data));
-}
-
-function dropCopy(ev){
-  ev.preventDefault();
-  var data = ev.dataTransfer.getData("Text");
-  var copy = document.createElement("img");
-  var original = document.getElementById(data);
-  copy.src = original.src;
-  copy.width = original.width;
-  copy.height = original.height;
-  copy.title = original.title;
-  ev.target.appendChild(copy);
-}

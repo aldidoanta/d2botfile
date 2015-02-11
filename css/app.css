@@ -43,7 +43,14 @@ body {
 
 .itemPriority{
   border: 1px solid black;
+  min-height: 39px;
+  /*min-width: 51px;*/
+  max-width: 257px;
   vertical-align: top;
+}
+
+.itemPriorityIcon{
+  display: inline-block;
 }
 
 .itemPriorityContainer{

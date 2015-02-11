@@ -4,6 +4,7 @@
 
 var d2botfileApp = angular.module('d2botfileApp', [
   'ngRoute',
+  'ng-sortable',
   'd2botfileControllers',
   'd2botfileFilters',
   'd2botfileServices'
