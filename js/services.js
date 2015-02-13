@@ -21,57 +21,82 @@ d2botfileServices.factory('abilityFactory', ['$resource', function($resource){
 }]);
 
 d2botfileServices.factory('botfileFactory', ['heroFactory', function(heroFactory){
-	//contains bot configuration for each hero
-	var botfileConfig = {};
 	//get hero data
     heroFactory.get(function(data){
-      var heroes = data.heroes;
-      for(var i = 0; i < heroes.length; i++){
-      	//init botfileConfig
-      	botfileConfig[heroes[i].name] =
-      		{
-      			"Bot": {
-      				"Loadout": {},
-      				"Build": {},
-      				"HeroType": "",
-      				"LaningInfo": {}
-      			}
-      		};
-      }
+    	if(localStorage.getItem("botfileConfig") === null){
+    		console.log("store new key");
+    		//contains bot configuration for each hero
+			var botfileConfig = {};
+    		var heroes = data.heroes;
+		      for(var i = 0; i < heroes.length; i++){
+		      	//init botfileConfig
+		      	botfileConfig[heroes[i].name] =
+	      		{
+	      			"Bot": {
+	      				"Loadout": {},
+	      				"Build": {},
+	      				"HeroType": "",
+	      				"LaningInfo": {}
+	      			}
+	      		};
+		      }
+	      localStorage.setItem("botfileConfig",JSON.stringify(botfileConfig));
+    	}
     });
 
 	return {
 		getBotfileConfig : function(){
-			return botfileConfig;
+			var storage_botfileConfig = JSON.parse(localStorage.getItem("botfileConfig"));;
+			// return botfileConfig;
+			return storage_botfileConfig;
 		},
 		getBotLoadout : function(hero_name){
-			return botfileConfig[hero_name].Bot.Loadout;
+			var storage_botfileConfig = JSON.parse(localStorage.getItem("botfileConfig"));
+			// return botfileConfig[hero_name].Bot.Loadout;
+			return storage_botfileConfig[hero_name].Bot.Loadout;
 		},
 		getBotBuild : function(hero_name){
-			return botfileConfig[hero_name].Bot.Build;
+			var storage_botfileConfig = JSON.parse(localStorage.getItem("botfileConfig"));
+			// return botfileConfig[hero_name].Bot.Build;
+			return storage_botfileConfig[hero_name].Bot.Build;
 		},
 		getBotHeroType : function(hero_name){
-			return botfileConfig[hero_name].Bot.HeroType;;
+			var storage_botfileConfig = JSON.parse(localStorage.getItem("botfileConfig"));
+			// return botfileConfig[hero_name].Bot.HeroType;
+			return storage_botfileConfig[hero_name].Bot.HeroType;
 		},
 		getBotLaningInfo : function(hero_name){
-			return botfileConfig[hero_name].Bot.LaningInfo;
+			var storage_botfileConfig = JSON.parse(localStorage.getItem("botfileConfig"));
+			// return botfileConfig[hero_name].Bot.LaningInfo;
+			return storage_botfileConfig[hero_name].Bot.LaningInfo;
 		},
 		setBotLoadout : function(hero_name, data){
-			botfileConfig[hero_name].Bot.Loadout = data;
-			return botfileConfig;
+			var storage_botfileConfig = JSON.parse(localStorage.getItem("botfileConfig"));
+			// botfileConfig[hero_name].Bot.Loadout = data;
+			storage_botfileConfig[hero_name].Bot.Loadout = data;
+			localStorage.setItem("botfileConfig",JSON.stringify(storage_botfileConfig));
+			return storage_botfileConfig;
 		},
 		setBotBuild : function(hero_name, data){
-			botfileConfig[hero_name].Bot.Build = data;
-			return botfileConfig;
+			var storage_botfileConfig = JSON.parse(localStorage.getItem("botfileConfig"));
+			// botfileConfig[hero_name].Bot.Build = data;
+			storage_botfileConfig[hero_name].Bot.Build = data;
+			localStorage.setItem("botfileConfig",JSON.stringify(storage_botfileConfig));
+			return storage_botfileConfig;
 		},
 		setBotHeroType : function(hero_name, data){
-			botfileConfig[hero_name].Bot.HeroType = data;
-			return botfileConfig;
+			var storage_botfileConfig = JSON.parse(localStorage.getItem("botfileConfig"));
+			//botfileConfig[hero_name].Bot.HeroType = data;
+			storage_botfileConfig[hero_name].Bot.HeroType = data;
+			localStorage.setItem("botfileConfig",JSON.stringify(storage_botfileConfig));
+			return storage_botfileConfig;
 		},
 		setBotLaningInfo : function(hero_name, data){
-			botfileConfig[hero_name].Bot.LaningInfo = data;
-			return botfileConfig;
-		},
-
+			var storage_botfileConfig = JSON.parse(localStorage.getItem("botfileConfig"));
+			// botfileConfig[hero_name].Bot.LaningInfo = data;
+			storage_botfileConfig[hero_name].Bot.LaningInfo = data;
+			localStorage.setItem("botfileConfig",JSON.stringify(storage_botfileConfig));
+			return storage_botfileConfig;
+		}
 	}
 }]);

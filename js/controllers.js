@@ -42,6 +42,27 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     "RequiresSetup"
   ];
 
+  //config for ng-sortable item
+  $scope.sortableItemConfig = {
+    group:{
+      name:'itemBuild',
+      pull:true,
+      put:true
+    },
+    animation:100,
+  };
+
+  //config for ng-sortable item list
+  $scope.sortableItemListConfig = {
+    group:{
+      name:'itemBuild',
+      pull:'clone',
+      put:false
+    },
+    sort: false,
+    animation:100
+  };
+
   //scope functions
   $scope.init = function(){
     //get hero data
@@ -78,6 +99,28 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
                     return str.toUpperCase();
                   });
     return newString;
+  };
+
+  //remove item image
+  $scope.removeItemImg = function(item,type){
+    switch(type){
+      case "ITEM_CONSUMABLES":
+        var index = $scope.item_consumables.indexOf(item);
+        $scope.item_consumables.splice(index, 1);
+        break;
+      case "ITEM_CORE":
+        var index = $scope.item_core.indexOf(item);
+        $scope.item_core.splice(index, 1);
+        break;
+      case "ITEM_EXTENSION":
+        var index = $scope.item_extension.indexOf(item);
+        $scope.item_extension.splice(index, 1);
+        break;
+      case "ITEM_LUXURY":
+        var index = $scope.item_luxury.indexOf(item);
+        $scope.item_luxury.splice(index, 1);
+        break;
+    }
   };
 
   //load last saved bot config
@@ -222,4 +265,5 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
 
   //fire init function
   $scope.init();
+
 }]);

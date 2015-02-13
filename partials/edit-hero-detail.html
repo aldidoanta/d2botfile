@@ -8,27 +8,27 @@
 	<div class="itemPanel">
 		<div class="itemPriorityContainer">
 			ITEM_CONSUMABLES
-			<div class="itemPriority" id="ITEM_CONSUMABLES" ng-sortable="{group:{name:'itemBuild', pull:true, put:true}, animation:100}">
-				<img class="itemPriorityIcon" ng-repeat="item in item_consumables track by $index" id="{{item}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" height="39px" width="51px">
+			<div class="itemPriority" id="ITEM_CONSUMABLES" ng-sortable="sortableItemConfig">
+				<img class="itemPriorityIcon" ng-repeat="item in item_consumables track by $index" id="{{item}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" height="39px" width="51px" ng-click="removeItemImg(item,'ITEM_CONSUMABLES')">
 			</div>
 			ITEM_CORE
-			<div class="itemPriority" id="ITEM_CORE" ng-sortable="{group:{name:'itemBuild', pull:true, put:true}, animation:100}">
-				<img class="itemPriorityIcon" ng-repeat="item in item_core track by $index" id="{{item}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" height="39px" width="51px">	
+			<div class="itemPriority" id="ITEM_CORE" ng-sortable="sortableItemConfig">
+				<img class="itemPriorityIcon" ng-repeat="item in item_core track by $index" id="{{item}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" height="39px" width="51px" ng-click="removeItemImg(item,'ITEM_CORE')">	
 			</div>
 			ITEM_EXTENSION
-			<div class="itemPriority" id="ITEM_EXTENSION" ng-sortable="{group:{name:'itemBuild', pull:true, put:true}, animation:100}">
-				<img class="itemPriorityIcon" ng-repeat="item in item_extension track by $index" id="{{item}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" height="39px" width="51px">	
+			<div class="itemPriority" id="ITEM_EXTENSION" ng-sortable="sortableItemConfig">
+				<img class="itemPriorityIcon" ng-repeat="item in item_extension track by $index" id="{{item}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" height="39px" width="51px" ng-click="removeItemImg(item,'ITEM_EXTENSION')">	
 			</div>
 			ITEM_LUXURY
-			<div class="itemPriority" id="ITEM_LUXURY" ng-sortable="{group:{name:'itemBuild', pull:true, put:true}, animation:100}">
-				<img class="itemPriorityIcon" ng-repeat="item in item_luxury track by $index" id="{{item}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" height="39px" width="51px">
+			<div class="itemPriority" id="ITEM_LUXURY" ng-sortable="sortableItemConfig">
+				<img class="itemPriorityIcon" ng-repeat="item in item_luxury track by $index" id="{{item}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" height="39px" width="51px" ng-click="removeItemImg(item,'ITEM_LUXURY')">
 			</div>
 		</div>
 		<div class="itemcat" ng-repeat="itemgroup in itemgroups">
 			<div class="itemcatIcon">
 				<img ng-src="img/itemcat/{{itemgroup.name}}.png" width="51" height="51" title="{{itemgroup.name}}">
 			</div>
-			<div class="itemIcon" id="itemIconList" ng-sortable="{group:{name:'itemBuild', pull:'clone', put:false}, sort: false, animation:150}">
+			<div class="itemIcon" id="itemIconList" ng-sortable="sortableItemListConfig">
 				<img ng-repeat="item in itemgroup.items track by $index" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" id="{{item}}" height="39px" width="51px">
 				<!-- <div ng-repeat="item in itemgroup.items">{{item}}</div> -->
 			</div>
@@ -45,7 +45,7 @@
 				<tbody>
 					<tr>
 						<td class="abilityIcon" align="center">
-							<img ng-src="http://cdn.dota2.com/apps/dota2/images/abilities/{{hero.abilities[$index]}}_md.png">
+							<img ng-src="http://cdn.dota2.com/apps/dota2/images/abilities/{{hero.abilities[$index]}}_md.png" onError="this.onError = null; this.src='img/default/ability.png'">
 						</td>
 						<td ng-repeat="levelIdx in range(levelNumber) track by $index" ng-click="selected = !selected" ng-class="{'selected': selected}" id="a{{$parent.$index+1}}lv{{$index+1}}" class = "abilityCell">{{$index+1}}</td>
 					</tr>
@@ -77,6 +77,6 @@
 	<span>Laning Info</span><br/>
 	<span>Use non-negative integers (0, 1, 2, 3, ...)</span>
 	<div ng-repeat="item in laningInfo track by $index">
-		{{splitCamelCase(laningInfo[$index])}}: <input type="number" id="laning_{{laningInfo[$index]}}" min="0" value="0"><br/>
+		{{splitCamelCase(laningInfo[$index])}}: <input type="number" id="laning_{{laningInfo[$index]}}" min="0"><br/>
 	</div>
 </div>

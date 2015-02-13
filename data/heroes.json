@@ -1167,6 +1167,17 @@
 			]
         },
         {
+            "id": 108,
+            "name": "npc_dota_hero_abyssal_underlord",
+            "localized_name": "Abyssal Underlord",
+			"abilities": [
+			    "abyssal_underlord_firestorm",
+				"abyssal_underlord_pit_of_malice",
+				"abyssal_underlord_atrophy_aura",
+				"abyssal_underlord_dark_rift"
+			]
+        },
+        {
             "id": 109,
             "name": "npc_dota_hero_terrorblade",
             "localized_name": "Terrorblade",
@@ -1197,6 +1208,17 @@
 				"oracle_fates_edict",
 				"oracle_purifying_flames",
 				"oracle_false_promise"
+			]
+        },
+        {
+            "id": 112,
+            "name": "npc_dota_hero_winter_wyvern",
+            "localized_name": "Winter Wyvern",
+			"abilities": [
+			    "winter_wyvern_arctic_burn",
+				"winter_wyvern_splinter_blast",
+				"winter_wyvern_cold_embrace",
+				"winter_wyvern_winters_curse"
 			]
         }
     ]
