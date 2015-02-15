@@ -17,10 +17,14 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
   $scope.levelNumber = 25;
   $scope.selected = false;
 
-  $scope.item_consumables = [];
-  $scope.item_core = [];
-  $scope.item_extension = [];
-  $scope.item_luxury = [];
+  $scope.loadout = [
+    //seed data
+    {
+      "name": "tango",
+      "priority": "ITEM_CONSUMABLE",
+      "sellable": true
+    }
+  ];
 
   $scope.heroRole = [
     "DOTA_BOT_HARD_CARRY",
@@ -44,23 +48,28 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
 
   //config for ng-sortable item
   $scope.sortableItemConfig = {
-    group:{
+    group: {
       name:'itemBuild',
       pull:true,
       put:true
     },
-    animation:100,
+    animation: 100,
+    onAdd: function(){
+      var item = event.item;
+      var targetIdx = event.newIndex;
+      $scope.addLoadoutElement(item.id,targetIdx);
+    }
   };
 
   //config for ng-sortable item list
   $scope.sortableItemListConfig = {
-    group:{
+    group: {
       name:'itemBuild',
       pull:'clone',
       put:false
     },
     sort: false,
-    animation:100
+    animation: 100
   };
 
   //scope functions
@@ -92,7 +101,7 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     return new Array(num);
   };
 
-  //convert string to Camel Case
+  //convert string to delimiter-separated Camel Case
   $scope.splitCamelCase = function(str){
     var newString = "";
     newString =  str.replace(/([A-Z])/g, ' $1').replace(/^./, function(str){
@@ -101,10 +110,56 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     return newString;
   };
 
-  //remove item image
+  //add item loadout element
+  $scope.addLoadoutElement = function(item_id,targetIdx){
+    var defaultPriority = "";
+    if($scope.itemgroups[0].items.indexOf(item_id) > -1){
+      defaultPriority = "ITEM_CONSUMABLE";
+    }
+    else{
+      if($scope.items[item_id].created == true){
+        defaultPriority = "ITEM_DERIVED";
+      }
+      else{
+        defaultPriority = "ITEM_CORE";
+      }
+    }
+    $scope.loadout.splice(targetIdx, 1, { //one "copied" image is removed from item list
+      "name": item_id,
+      "priority": defaultPriority,
+      "sellable": false
+    });
+    $scope.$apply();
+  }
+
+  //set the options for item loadout element's priority
+  $scope.setPriorityOptions = function(defaultPriority){
+    var options = [];
+    switch (defaultPriority){
+      case "ITEM_CONSUMABLE": {
+        options = ["ITEM_CONSUMABLE"];
+        break;
+      }
+      case "ITEM_DERIVED": {
+        options = ["ITEM_DERIVED"];
+        break;
+      }
+      default: {
+        options = [
+          "ITEM_CORE",
+          "ITEM_EXTENSION",
+          "ITEM_LUXURY"
+        ];
+        break;
+      }
+    }
+    return options;
+  };
+
+  //remove item loadout element
   $scope.removeItemImg = function(item,type){
-    switch(type){
-      case "ITEM_CONSUMABLES":
+    /*switch(type){
+      case "ITEM_CONSUMABLE":
         var index = $scope.item_consumables.indexOf(item);
         $scope.item_consumables.splice(index, 1);
         break;
@@ -120,20 +175,21 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
         var index = $scope.item_luxury.indexOf(item);
         $scope.item_luxury.splice(index, 1);
         break;
-    }
+    }*/
   };
 
   //load last saved bot config
   $scope.getBotfileConfigHero = function(hero_name){
 
     //load "Loadout"
-    var loadout = botfileFactory.getBotLoadout(hero_name);
+    //TODO change load method
+    /*var loadout = botfileFactory.getBotLoadout(hero_name);
     if(loadout.length > 0){
       $scope.item_consumables = loadout[0].items;
       $scope.item_core = loadout[1].items;
       $scope.item_extension = loadout[2].items;
       $scope.item_luxury = loadout[3].items;
-    }
+    }*/
 
     //load "Build"
     var build = botfileFactory.getBotBuild(hero_name);
@@ -183,24 +239,18 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
   $scope.setBotfileConfigHero = function(hero_name){
 
     //save "Loadout"
-    var loadout = [
+    /*intended format: [
       {
-        "name": "ITEM_CONSUMABLES",
-        "items": []
+        "name": "item_itemname",
+        "priority": "ITEM_CONSUMABLE" | "ITEM_CORE" | "ITEM_EXTENSION" | "ITEM_LUXURY" | "ITEM_DERIVED",
+        "sellable": true
       },
       {
-        "name": "ITEM_CORE",
-        "items": []
-      },
-      {
-        "name": "ITEM_EXTENSION",
-        "items": []
-      },
-      {
-        "name": "ITEM_LUXURY",
-        "items": []
-      },
-    ];
+        ...
+      }
+    ]*/
+    //TODO get loadout from list
+    /*var loadout = [];
     for (var i = 0; i < loadout.length; i++) {
       var items = document.getElementById(loadout[i].name).childNodes;
       for (var j = 0; j < items.length; j++) {
@@ -209,7 +259,7 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
         }
       }
     }
-    botfileFactory.setBotLoadout(hero_name,loadout);
+    botfileFactory.setBotLoadout(hero_name,loadout);*/
 
 
     //save "Build"

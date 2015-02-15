@@ -6,23 +6,31 @@
 	<span>Item Loadout</span>
 
 	<div class="itemPanel">
-		<div class="itemPriorityContainer">
-			ITEM_CONSUMABLES
-			<div class="itemPriority" id="ITEM_CONSUMABLES" ng-sortable="sortableItemConfig">
-				<img class="itemPriorityIcon" ng-repeat="item in item_consumables track by $index" id="{{item}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" height="39px" width="51px" ng-click="removeItemImg(item,'ITEM_CONSUMABLES')">
-			</div>
-			ITEM_CORE
-			<div class="itemPriority" id="ITEM_CORE" ng-sortable="sortableItemConfig">
-				<img class="itemPriorityIcon" ng-repeat="item in item_core track by $index" id="{{item}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" height="39px" width="51px" ng-click="removeItemImg(item,'ITEM_CORE')">	
-			</div>
-			ITEM_EXTENSION
-			<div class="itemPriority" id="ITEM_EXTENSION" ng-sortable="sortableItemConfig">
-				<img class="itemPriorityIcon" ng-repeat="item in item_extension track by $index" id="{{item}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" height="39px" width="51px" ng-click="removeItemImg(item,'ITEM_EXTENSION')">	
-			</div>
-			ITEM_LUXURY
-			<div class="itemPriority" id="ITEM_LUXURY" ng-sortable="sortableItemConfig">
-				<img class="itemPriorityIcon" ng-repeat="item in item_luxury track by $index" id="{{item}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item}}_lg.png" title="{{items[item].dname}}" height="39px" width="51px" ng-click="removeItemImg(item,'ITEM_LUXURY')">
-			</div>
+		<div class="itemLoadout">
+			<table class="itemLoadoutTable">
+				<tbody id="itemLoadoutList" ng-sortable="sortableItemConfig">
+					<tr ng-repeat="item in loadout track by $index">
+						<td class="itemLoadoutCell">
+							<img id="{{item.name}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item.name}}_lg.png" height="39px" width="51px">
+						</td>
+						<td class="itemLoadoutCell">{{item.name}}</td>
+						<td class="itemLoadoutCell">
+							<select>
+								<option ng-repeat="elmt in setPriorityOptions(item.priority)" ng-model="item.priority" ng-value="elmt">
+									{{elmt}}
+								</option>
+							</select>
+						</td>
+						<td class="itemLoadoutCell"><input type="checkbox" ng-model="item.sellable">Sellable</td>
+					</tr>
+					<!-- <tr>
+						<td class="itemLoadoutCell">&nbsp</td>
+						<td class="itemLoadoutCell">&nbsp</td>
+						<td class="itemLoadoutCell">&nbsp</td>
+						<td class="itemLoadoutCell">&nbsp</td>
+					</tr> -->
+				</tbody>
+			</table>
 		</div>
 		<div class="itemcat" ng-repeat="itemgroup in itemgroups">
 			<div class="itemcatIcon">

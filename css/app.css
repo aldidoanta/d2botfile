@@ -4,7 +4,7 @@ body {
   padding-top: 20px;
 }
 
-.heroes {
+.heroes{
   list-style: none;
   max-height: 500px;
   overflow-y: auto;
@@ -41,20 +41,28 @@ body {
   padding-bottom: 5px;
 }
 
-.itemPriority{
+.itemLoadout{
+  display:inline-block;
   border: 1px solid black;
   min-height: 39px;
-  /*min-width: 51px;*/
-  max-width: 257px;
+  min-width: 51px;
+  /*max-width: 257px;*/
   vertical-align: top;
 }
 
-.itemPriorityIcon{
-  display: inline-block;
+.itemLoadoutTable{
+  display:inline-block;
+  border: 1px solid black;
+  table-layout: fixed;
+  min-width: 100px;
+  min-height: 40px;
+  max-height: 500px;
+  overflow-y: auto;
 }
 
-.itemPriorityContainer{
-  display:inline-block;
+.itemLoadoutCell{
+  border: 1px solid black;
+  overflow: hidden;
 }
 
 .itemPriorityTarget{
