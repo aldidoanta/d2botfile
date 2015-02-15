@@ -24,7 +24,6 @@ d2botfileServices.factory('botfileFactory', ['heroFactory', function(heroFactory
 	//get hero data
     heroFactory.get(function(data){
     	if(localStorage.getItem("botfileConfig") === null){
-    		console.log("store new key");
     		//contains bot configuration for each hero
 			var botfileConfig = {};
     		var heroes = data.heroes;
@@ -33,7 +32,7 @@ d2botfileServices.factory('botfileFactory', ['heroFactory', function(heroFactory
 		      	botfileConfig[heroes[i].name] =
 	      		{
 	      			"Bot": {
-	      				"Loadout": {},
+	      				"Loadout": [],
 	      				"Build": {},
 	      				"HeroType": "",
 	      				"LaningInfo": {}
