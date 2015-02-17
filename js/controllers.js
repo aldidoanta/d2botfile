@@ -54,15 +54,10 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
       put:true
     },
     animation: 100,
-    onAdd: function(){
-      var item = event.item;
+    onAdd: function(event){
+      event = event || window.event;
       var targetIdx = event.newIndex;
-      $scope.addLoadoutElement(item.id,targetIdx);
-    },
-    onEnd: function(){
-      var item = event.item;
-      var target = event.target;
-      console.log(target);
+      $scope.addLoadoutElement(event.model,targetIdx);
     }
   };
 
