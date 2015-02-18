@@ -57,6 +57,7 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     onAdd: function(event){
       event = event || window.event;
       var targetIdx = event.newIndex;
+      console.log($scope.loadout);
       $scope.addLoadoutElement(event.model,targetIdx);
     }
   };
@@ -119,6 +120,8 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     else{
       if($scope.items[item_id].created == true){
         defaultPriority = "ITEM_DERIVED";
+        //TODO add component items
+        
       }
       else{
         defaultPriority = "ITEM_CORE";
