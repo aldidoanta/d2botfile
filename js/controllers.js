@@ -57,7 +57,6 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     onAdd: function(event){
       event = event || window.event;
       var targetIdx = event.newIndex;
-      console.log($scope.loadout);
       $scope.addLoadoutElement(event.model,targetIdx);
     }
   };
@@ -90,6 +89,7 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     //get item_group data
     itemgroupFactory.get(function(data) {
       $scope.itemgroups = data.itemdata_group;
+      $scope.itemreqrecipe = data.itemdata_require_recipe;
     });
     //get ability data
     abilityFactory.get(function(data) {
@@ -114,25 +114,56 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
   //add item loadout element
   $scope.addLoadoutElement = function(item_id,targetIdx){
     var defaultPriority = "";
-    if(($scope.itemgroups[0].items.indexOf(item_id) > -1) && (item_id != "bottle")){
+    if(($scope.itemgroups[0].items.indexOf(item_id) > -1) && (item_id != "bottle")){ //check if item is in the consumable group
       defaultPriority = "ITEM_CONSUMABLE";
+      $scope.loadout.splice(targetIdx, 0, {
+        "name": item_id,
+        "priority": defaultPriority,
+        "sellable": false
+      });
+      if($scope.loadout[targetIdx+1] === item_id){
+        $scope.loadout.splice(targetIdx+1,1); //one "copied" image is removed from item list
+      }
+      $scope.$apply();
+      console.log($scope.loadout);
     }
     else{
-      if($scope.items[item_id].created == true){
+      if(($scope.items[item_id] !== undefined) && ($scope.items[item_id].created == true)){
         defaultPriority = "ITEM_DERIVED";
-        //TODO add component items
-        
+        $scope.loadout.splice(targetIdx, 0, {
+          "name": item_id,
+          "priority": defaultPriority,
+          "sellable": false
+        });
+        if($scope.loadout[targetIdx+1] === item_id){
+          $scope.loadout.splice(targetIdx+1,1); //one "copied" image is removed from item list
+        }
+        $scope.$apply();
+
+        //iterate through the components
+        if($scope.itemreqrecipe.indexOf(item_id) > -1){ //check if the item has a recipe component
+          //TODO fix recipe item image looks like the actual item
+          $scope.addLoadoutElement("recipe",targetIdx); //for visual purpose
+          //$scope.addLoadoutElement("recipe_"+item_id,targetIdx); //the true code
+        }
+        for(var i = $scope.items[item_id].components.length-1; i >= 0 ; i--){
+          $scope.addLoadoutElement($scope.items[item_id].components[i],targetIdx);
+        }
       }
       else{
         defaultPriority = "ITEM_CORE";
+        $scope.loadout.splice(targetIdx, 0, {
+          "name": item_id,
+          "priority": defaultPriority,
+          "sellable": false
+        });
+        if($scope.loadout[targetIdx+1] === item_id){
+          $scope.loadout.splice(targetIdx+1,1); //one "copied" image is removed from item list
+        }
+        $scope.$apply();
+        console.log($scope.loadout);
       }
     }
-    $scope.loadout.splice(targetIdx, 1, { //one "copied" image is removed from item list
-      "name": item_id,
-      "priority": defaultPriority,
-      "sellable": false
-    });
-    $scope.$apply();
   }
 
   //set the options for item loadout element's priority
