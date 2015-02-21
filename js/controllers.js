@@ -57,7 +57,7 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     onAdd: function(event){
       event = event || window.event;
       var targetIdx = event.newIndex;
-      $scope.addLoadoutElement(event.model,targetIdx);
+      $scope.addLoadoutElement(event.model.name,targetIdx);
     }
   };
 
@@ -111,18 +111,28 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     return newString;
   };
 
+  //search if an array of object contains a specific key-value pair
+  $scope.isValueInArrObj = function(array,key,value){
+    var result = array.filter(function(obj){
+      return obj.key === value;
+    });
+    var found = result.length > 0 ? true : false;
+
+    return found;
+  }
+
   //add item loadout element
   $scope.addLoadoutElement = function(item_id,targetIdx){
     var defaultPriority = "";
-    if(($scope.itemgroups[0].items.indexOf(item_id) > -1) && (item_id != "bottle")){ //check if item is in the consumable group
+    if((item_id != "bottle") && ($scope.isValueInArrObj($scope.itemgroups[0].items,"name",item_id))){ //check if item is in the consumable group
       defaultPriority = "ITEM_CONSUMABLE";
       $scope.loadout.splice(targetIdx, 0, {
         "name": item_id,
         "priority": defaultPriority,
         "sellable": false
       });
-      if($scope.loadout[targetIdx+1] === item_id){
-        $scope.loadout.splice(targetIdx+1,1); //one "copied" image is removed from item list
+      if("dname" in $scope.loadout[targetIdx+1]){
+        $scope.loadout.splice(targetIdx+1,1); //one "copied" event.model is removed from item list
       }
       $scope.$apply();
       console.log($scope.loadout);
@@ -135,8 +145,8 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
           "priority": defaultPriority,
           "sellable": false
         });
-        if($scope.loadout[targetIdx+1] === item_id){
-          $scope.loadout.splice(targetIdx+1,1); //one "copied" image is removed from item list
+        if("dname" in $scope.loadout[targetIdx+1]){
+          $scope.loadout.splice(targetIdx+1,1); //one "copied" event.model is removed from item list
         }
         $scope.$apply();
 
@@ -157,8 +167,8 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
           "priority": defaultPriority,
           "sellable": false
         });
-        if($scope.loadout[targetIdx+1] === item_id){
-          $scope.loadout.splice(targetIdx+1,1); //one "copied" image is removed from item list
+        if("dname" in $scope.loadout[targetIdx+1]){
+          $scope.loadout.splice(targetIdx+1,1); //one "copied" event.model is removed from item list
         }
         $scope.$apply();
         console.log($scope.loadout);

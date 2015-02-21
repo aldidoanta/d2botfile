@@ -1,189 +1,576 @@
 {
     "itemdata_group": [
-        {
-            "name": "Consumables",
-            "items": [
-                "clarity",
-                "tango",
-                "flask",
-                "smoke_of_deceit",
-                "tpscroll",
-                "dust",
-                "courier",
-                "flying_courier",
-                "ward_observer",
-                "ward_sentry",
-                "bottle"
-            ]
-        },
-        {
-            "name": "Attributes",
-            "items": [
-                "branches",
-                "gauntlets",
-                "slippers",
-                "mantle",
-                "circlet",
-                "belt_of_strength",
-                "boots_of_elves",
-                "robe",
-                "ogre_axe",
-                "blade_of_alacrity",
-                "staff_of_wizardry",
-                "ultimate_orb"
-            ]
-        },
-        {
-            "name": "Armaments",
-            "items": [
-                "ring_of_protection",
-                "quelling_blade",
-                "stout_shield",
-                "blades_of_attack",
-                "chainmail",
-                "helm_of_iron_will",
-                "broadsword",
-                "quarterstaff",
-                "claymore",
-                "javelin",
-                "platemail",
-                "mithril_hammer"
-            ]
-        },
-        {
-            "name": "Arcane",
-            "items": [
-                "magic_stick",
-                "sobi_mask",
-                "ring_of_regen",
-                "boots",
-                "gloves",
-                "cloak",
-                "gem",
-                "lifesteal",
-                "ghost",
-                "talisman_of_evasion",
-                "blink",
-                "shadow_amulet"
-            ]
-        },
-        {
-            "name": "Common",
-            "items": [
-                "wraith_band",
-                "null_talisman",
-                "magic_wand",
-                "bracer",
-                "poor_mans_shield",
-                "soul_ring",
-                "phase_boots",
-                "power_treads",
-                "oblivion_staff",
-                "pers",
-                "hand_of_midas",
-                "travel_boots"
-            ]
-        },
-        {
-            "name": "Support",
-            "items": [
-                "ring_of_basilius",
-                "headdress",
-                "buckler",
-                "urn_of_shadows",
-                "ring_of_aquila",
-                "tranquil_boots",
-                "medallion_of_courage",
-                "arcane_boots",
-                "ancient_janggo",
-                "vladmir",
-                "mekansm",
-                "pipe"
-            ]
-        },
-        {
-            "name": "Caster",
-            "items": [
-                "force_staff",
-                "necronomicon",
-                "cyclone",
-                "dagon",
-                "veil_of_discord",
-                "rod_of_atos",
-                "ultimate_scepter",
-                "orchid",
-                "refresher",
-                "sheepstick"
-            ]
-        },
-        {
-            "name": "Weapons",
-            "items": [
-                "lesser_crit",
-                "armlet",
-                "basher",
-                "invis_sword",
-                "bfury",
-                "ethereal_blade",
-                "radiance",
-                "monkey_king_bar",
-                "greater_crit",
-                "butterfly",
-                "rapier",
-                "abyssal_blade"
-            ]
-        },
-        {
-            "name": "Armor",
-            "items": [
-                "hood_of_defiance",
-                "blade_mail",
-                "vanguard",
-                "soul_booster",
-                "black_king_bar",
-                "shivas_guard",
-                "manta",
-                "bloodstone",
-                "sphere",
-                "assault",
-                "heart",
-                "crimson_guard"
-            ]
-        },
-        {
-            "name": "Artifacts",
-            "items": [
-                "helm_of_the_dominator",
-                "mask_of_madness",
-                "sange",
-                "yasha",
-                "maelstrom",
-                "diffusal_blade",
-                "desolator",
-                "heavens_halberd",
-                "sange_and_yasha",
-                "mjollnir",
-                "skadi",
-                "satanic"
-            ]
-        },
-        {
-            "name": "Secret Shop",
-            "items": [
-                "orb_of_venom",
-                "ring_of_health",
-                "void_stone",
-                "energy_booster",
-                "vitality_booster",
-                "point_booster",
-                "hyperstone",
-                "demon_edge",
-                "mystic_staff",
-                "reaver",
-                "eagle",
-                "relic"
-            ]
-        }
+      {
+        "name": "Consumables",
+        "items": [
+          {
+            "name": "clarity",
+            "dname": "Clarity"
+          },
+          {
+            "name": "tango",
+            "dname": "Tango"
+          },
+          {
+            "name": "flask",
+            "dname": "Healing Salve"
+          },
+          {
+            "name": "smoke_of_deceit",
+            "dname": "Smoke of Deceit"
+          },
+          {
+            "name": "tpscroll",
+            "dname": "Town Portal Scroll"
+          },
+          {
+            "name": "dust",
+            "dname": "Dust of Appearance"
+          },
+          {
+            "name": "courier",
+            "dname": "Animal Courier"
+          },
+          {
+            "name": "flying_courier",
+            "dname": "Flying Courier"
+          },
+          {
+            "name": "ward_observer",
+            "dname": "Observer Ward"
+          },
+          {
+            "name": "ward_sentry",
+            "dname": "Sentry Ward"
+          },
+          {
+            "name": "bottle",
+            "dname": "Bottle"
+          }
+        ]
+      },
+      {
+        "name": "Attributes",
+        "items": [
+          {
+            "name": "branches",
+            "dname": "Iron Branch"
+          },
+          {
+            "name": "gauntlets",
+            "dname": "Gauntlets of Strength"
+          },
+          {
+            "name": "slippers",
+            "dname": "Slippers of Agility"
+          },
+          {
+            "name": "mantle",
+            "dname": "Mantle of Intelligence"
+          },
+          {
+            "name": "circlet",
+            "dname": "Circlet"
+          },
+          {
+            "name": "belt_of_strength",
+            "dname": "Belt of Strength"
+          },
+          {
+            "name": "boots_of_elves",
+            "dname": "Band of Elvenskin"
+          },
+          {
+            "name": "robe",
+            "dname": "Robe of the Magi"
+          },
+          {
+            "name": "ogre_axe",
+            "dname": "Ogre Club"
+          },
+          {
+            "name": "blade_of_alacrity",
+            "dname": "Blade of Alacrity"
+          },
+          {
+            "name": "staff_of_wizardry",
+            "dname": "Staff of Wizardry"
+          },
+          {
+            "name": "ultimate_orb",
+            "dname": "Ultimate Orb"
+          }
+        ]
+      },
+      {
+        "name": "Armaments",
+        "items": [
+          {
+            "name": "ring_of_protection",
+            "dname": "Ring of Protection"
+          },
+          {
+            "name": "quelling_blade",
+            "dname": "Quelling Blade"
+          },
+          {
+            "name": "stout_shield",
+            "dname": "Stout Shield"
+          },
+          {
+            "name": "blades_of_attack",
+            "dname": "Blades of Attack"
+          },
+          {
+            "name": "chainmail",
+            "dname": "Chainmail"
+          },
+          {
+            "name": "helm_of_iron_will",
+            "dname": "Helm of Iron Will"
+          },
+          {
+            "name": "broadsword",
+            "dname": "Broadsword"
+          },
+          {
+            "name": "quarterstaff",
+            "dname": "Quarterstaff"
+          },
+          {
+            "name": "claymore",
+            "dname": "Claymore"
+          },
+          {
+            "name": "javelin",
+            "dname": "Javelin"
+          },
+          {
+            "name": "platemail",
+            "dname": "Platemail"
+          },
+          {
+            "name": "mithril_hammer",
+            "dname": "Mithril Hammer"
+          }
+        ]
+      },
+      {
+        "name": "Arcane",
+        "items": [
+          {
+            "name": "magic_stick",
+            "dname": "Magic Stick"
+          },
+          {
+            "name": "sobi_mask",
+            "dname": "Sage's Mask"
+          },
+          {
+            "name": "ring_of_regen",
+            "dname": "Ring of Regen"
+          },
+          {
+            "name": "boots",
+            "dname": "Boots of Speed"
+          },
+          {
+            "name": "gloves",
+            "dname": "Gloves of Haste"
+          },
+          {
+            "name": "cloak",
+            "dname": "Cloak"
+          },
+          {
+            "name": "gem",
+            "dname": "Gem of True Sight"
+          },
+          {
+            "name": "lifesteal",
+            "dname": "Morbid Mask"
+          },
+          {
+            "name": "ghost",
+            "dname": "Ghost Scepter"
+          },
+          {
+            "name": "talisman_of_evasion",
+            "dname": "Talisman of Evasion"
+          },
+          {
+            "name": "blink",
+            "dname": "Blink Dagger"
+          },
+          {
+            "name": "shadow_amulet",
+            "dname": "Shadow Amulet"
+          }
+        ]
+      },
+      {
+        "name": "Common",
+        "items": [
+          {
+            "name": "wraith_band",
+            "dname": "Wraith Band"
+          },
+          {
+            "name": "null_talisman",
+            "dname": "Null Talisman"
+          },
+          {
+            "name": "magic_wand",
+            "dname": "Magic Wand"
+          },
+          {
+            "name": "bracer",
+            "dname": "Bracer"
+          },
+          {
+            "name": "poor_mans_shield",
+            "dname": "Poor Man's Shield"
+          },
+          {
+            "name": "soul_ring",
+            "dname": "Soul Ring"
+          },
+          {
+            "name": "phase_boots",
+            "dname": "Phase Boots"
+          },
+          {
+            "name": "power_treads",
+            "dname": "Power Treads"
+          },
+          {
+            "name": "oblivion_staff",
+            "dname": "Oblivion Staff"
+          },
+          {
+            "name": "pers",
+            "dname": "Perseverance"
+          },
+          {
+            "name": "hand_of_midas",
+            "dname": "Hand of Midas"
+          },
+          {
+            "name": "travel_boots",
+            "dname": "Boots of Travel"
+          }
+        ]
+      },
+      {
+        "name": "Support",
+        "items": [
+          {
+            "name": "ring_of_basilius",
+            "dname": "Ring of Basilius"
+          },
+          {
+            "name": "headdress",
+            "dname": "Headdress"
+          },
+          {
+            "name": "buckler",
+            "dname": "Buckler"
+          },
+          {
+            "name": "urn_of_shadows",
+            "dname": "Urn of Shadows"
+          },
+          {
+            "name": "ring_of_aquila",
+            "dname": "Ring of Aquila"
+          },
+          {
+            "name": "tranquil_boots",
+            "dname": "Tranquil Boots"
+          },
+          {
+            "name": "medallion_of_courage",
+            "dname": "Medallion of Courage"
+          },
+          {
+            "name": "arcane_boots",
+            "dname": "Arcane Boots"
+          },
+          {
+            "name": "ancient_janggo",
+            "dname": "Drum of Endurance"
+          },
+          {
+            "name": "vladmir",
+            "dname": "Vladmir's Offering"
+          },
+          {
+            "name": "mekansm",
+            "dname": "Mekansm"
+          },
+          {
+            "name": "pipe",
+            "dname": "Pipe of Insight"
+          }
+        ]
+      },
+      {
+        "name": "Caster",
+        "items": [
+          {
+            "name": "force_staff",
+            "dname": "Force Staff"
+          },
+          {
+            "name": "necronomicon",
+            "dname": "Necronomicon"
+          },
+          {
+            "name": "cyclone",
+            "dname": "Eul's Scepter of Divinity"
+          },
+          {
+            "name": "dagon",
+            "dname": "Dagon"
+          },
+          {
+            "name": "veil_of_discord",
+            "dname": "Veil of Discord"
+          },
+          {
+            "name": "rod_of_atos",
+            "dname": "Rod of Atos"
+          },
+          {
+            "name": "ultimate_scepter",
+            "dname": "Aghanim's Scepter"
+          },
+          {
+            "name": "orchid",
+            "dname": "Orchid Malevolence"
+          },
+          {
+            "name": "refresher",
+            "dname": "Refresher Orb"
+          },
+          {
+            "name": "sheepstick",
+            "dname": "Scythe of Vyse"
+          }
+        ]
+      },
+      {
+        "name": "Weapons",
+        "items": [
+          {
+            "name": "lesser_crit",
+            "dname": "Crystalys"
+          },
+          {
+            "name": "armlet",
+            "dname": "Armlet of Mordiggian"
+          },
+          {
+            "name": "basher",
+            "dname": "Skull Basher"
+          },
+          {
+            "name": "invis_sword",
+            "dname": "Shadow Blade"
+          },
+          {
+            "name": "bfury",
+            "dname": "Battle Fury"
+          },
+          {
+            "name": "ethereal_blade",
+            "dname": "Ethereal Blade"
+          },
+          {
+            "name": "radiance",
+            "dname": "Radiance"
+          },
+          {
+            "name": "monkey_king_bar",
+            "dname": "Monkey King Bar"
+          },
+          {
+            "name": "greater_crit",
+            "dname": "Daedalus"
+          },
+          {
+            "name": "butterfly",
+            "dname": "Butterfly"
+          },
+          {
+            "name": "rapier",
+            "dname": "Divine Rapier"
+          },
+          {
+            "name": "abyssal_blade",
+            "dname": "Abyssal Blade"
+          }
+        ]
+      },
+      {
+        "name": "Armor",
+        "items": [
+          {
+            "name": "hood_of_defiance",
+            "dname": "Hood of Defiance"
+          },
+          {
+            "name": "blade_mail",
+            "dname": "Blade Mail"
+          },
+          {
+            "name": "vanguard",
+            "dname": "Vanguard"
+          },
+          {
+            "name": "soul_booster",
+            "dname": "Soul Booster"
+          },
+          {
+            "name": "black_king_bar",
+            "dname": "Black King Bar"
+          },
+          {
+            "name": "shivas_guard",
+            "dname": "Shiva's Guard"
+          },
+          {
+            "name": "manta",
+            "dname": "Manta Style"
+          },
+          {
+            "name": "bloodstone",
+            "dname": "Bloodstone"
+          },
+          {
+            "name": "sphere",
+            "dname": "Linken's Sphere"
+          },
+          {
+            "name": "assault",
+            "dname": "Assault Cuirass"
+          },
+          {
+            "name": "heart",
+            "dname": "Heart of Tarrasque"
+          },
+          {
+            "name": "crimson_guard",
+            "dname": "Crimson Guard"
+          }
+        ]
+      },
+      {
+        "name": "Artifacts",
+        "items": [
+          {
+            "name": "helm_of_the_dominator",
+            "dname": "Helm of the Dominator"
+          },
+          {
+            "name": "mask_of_madness",
+            "dname": "Mask of Madness"
+          },
+          {
+            "name": "sange",
+            "dname": "Sange"
+          },
+          {
+            "name": "yasha",
+            "dname": "Yasha"
+          },
+          {
+            "name": "maelstrom",
+            "dname": "Maelstrom"
+          },
+          {
+            "name": "diffusal_blade",
+            "dname": "Diffusal Blade"
+          },
+          {
+            "name": "desolator",
+            "dname": "Desolator"
+          },
+          {
+            "name": "heavens_halberd",
+            "dname": "Heaven's Halberd"
+          },
+          {
+            "name": "sange_and_yasha",
+            "dname": "Sange and Yasha"
+          },
+          {
+            "name": "mjollnir",
+            "dname": "Mjollnir"
+          },
+          {
+            "name": "skadi",
+            "dname": "Eye of Skadi"
+          },
+          {
+            "name": "satanic",
+            "dname": "Satanic"
+          }
+        ]
+      },
+      {
+        "name": "Secret Shop",
+        "items": [
+          {
+            "name": "orb_of_venom",
+            "dname": "Orb of Venom"
+          },
+          {
+            "name": "ring_of_health",
+            "dname": "Ring of Health"
+          },
+          {
+            "name": "void_stone",
+            "dname": "Void Stone"
+          },
+          {
+            "name": "energy_booster",
+            "dname": "Energy Booster"
+          },
+          {
+            "name": "vitality_booster",
+            "dname": "Vitality Booster"
+          },
+          {
+            "name": "point_booster",
+            "dname": "Point Booster"
+          },
+          {
+            "name": "hyperstone",
+            "dname": "Hyperstone"
+          },
+          {
+            "name": "demon_edge",
+            "dname": "Demon Edge"
+          },
+          {
+            "name": "mystic_staff",
+            "dname": "Mystic Staff"
+          },
+          {
+            "name": "reaver",
+            "dname": "Reaver"
+          },
+          {
+            "name": "eagle",
+            "dname": "Eaglesong"
+          },
+          {
+            "name": "relic",
+            "dname": "Sacred Relic"
+          }
+        ]
+      }
     ],
     "itemdata_require_recipe" : [
         "wraith_band",
