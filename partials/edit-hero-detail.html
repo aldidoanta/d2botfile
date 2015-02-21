@@ -26,12 +26,30 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="itemcat" ng-repeat="itemgroup in itemgroups">
-			<div class="itemcatIcon">
-				<img ng-src="img/itemcat/{{itemgroup.name}}.png" width="51" height="51" title="{{itemgroup.name}}">
-			</div>
-			<div class="itemIcon" id="itemIconList" ng-sortable="sortableItemListConfig">
-				<img ng-repeat="item in itemgroup.items track by $index" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item.name}}_lg.png" title="{{item.dname}}" id="{{item.name}}" height="39px" width="51px">
+		<div class="itemList">
+			<div class="form-group">
+		        <div>
+		          Search: <input ng-model="itemQuery" placeholder="Search Item">
+		        </div>
+	    	</div>
+
+	    	<ul class="myList list-group" id= "itemIconNameList" ng-hide="(itemQuery == null) || (itemQuery.length <= 0)" ng-sortable="sortableItemListConfig">
+	    		<li class="list-group-item" ng-repeat="item in itemList | filter:itemQuery | orderBy:orderItem">
+	    			<img ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item.name}}_lg.png" id="{{item.name}}" height="39px" width="51px">
+	    			<span style="color:#000000">{{item.dname}}</span>
+	    		</li>
+	    	</ul>
+	    	<div>
+	    		<span ng-show="(itemList | filter:itemQuery).length == 0">No Results</span>
+	      	</div>
+
+	    	<div class="itemcat" ng-repeat="itemgroup in itemgroups" ng-hide="(itemQuery != null) && (itemQuery.length > 0)">
+				<div class="itemcatIcon">
+					<img ng-src="img/itemcat/{{itemgroup.name}}.png" width="51" height="51" title="{{itemgroup.name}}">
+				</div>
+				<div class="itemIcon" id="itemIconList" ng-sortable="sortableItemListConfig">
+					<img ng-repeat="item in itemgroup.items track by $index" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item.name}}_lg.png" title="{{item.dname}}" id="{{item.name}}" height="39px" width="51px">
+				</div>
 			</div>
 		</div>
 	</div>

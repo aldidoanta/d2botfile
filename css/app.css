@@ -4,7 +4,7 @@ body {
   padding-top: 20px;
 }
 
-.heroes{
+.myList{
   list-style: none;
   max-height: 500px;
   overflow-y: auto;
@@ -29,6 +29,10 @@ body {
 .itemPanel{
   width:auto;
   position: relative;
+}
+
+.itemList{
+  display: inline-block;
 }
 
 .itemcat{

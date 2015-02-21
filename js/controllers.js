@@ -8,7 +8,7 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
 
   //other scope variables
   $scope.orderHero = 'localized_name';
-  $scope.orderItem = 'value.dname';
+  $scope.orderItem = 'dname';
   $scope.orderAbility = 'value.dname';
   $scope.heroIdx = $routeParams.heroIdx;
 
@@ -90,6 +90,16 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     itemgroupFactory.get(function(data) {
       $scope.itemgroups = data.itemdata_group;
       $scope.itemreqrecipe = data.itemdata_require_recipe;
+
+      $scope.itemList = (function(){
+        var arr = [];
+        for(var i = 0; i < $scope.itemgroups.length; i++){
+          for(var j = 0; j < $scope.itemgroups[i].items.length; j++){
+            arr.push($scope.itemgroups[i].items[j]);
+          }
+        }
+        return arr;
+      })();
     });
     //get ability data
     abilityFactory.get(function(data) {
@@ -135,7 +145,6 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
         $scope.loadout.splice(targetIdx+1,1); //one "copied" event.model is removed from item list
       }
       $scope.$apply();
-      console.log($scope.loadout);
     }
     else{
       if(($scope.items[item_id] !== undefined) && ($scope.items[item_id].created == true)){
@@ -171,7 +180,6 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
           $scope.loadout.splice(targetIdx+1,1); //one "copied" event.model is removed from item list
         }
         $scope.$apply();
-        console.log($scope.loadout);
       }
     }
   }

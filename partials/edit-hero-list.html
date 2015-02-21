@@ -5,15 +5,18 @@
       <!-- search sidebar -->
       <div class="form-group">
         <div>
-          Search: <input ng-model="query" placeholder="Search Hero">
+          Search: <input ng-model="heroQuery" placeholder="Search Hero">
         </div>
       </div>
 
-      <ul class="heroes list-group">
-        <li class="list-group-item" ng-repeat="hero in heroes | filter:query | orderBy:orderHero">
+      <ul class="myList list-group">
+        <li class="list-group-item" ng-repeat="hero in heroes | filter:heroQuery | orderBy:orderHero">
           <a href="#/edit/{{heroes.indexOf(hero)}}"><span style="color:#000000">{{hero.localized_name}}</span></a>
         </li>
       </ul>
+      <div>
+        <span ng-show="(heroes | filter:heroQuery).length == 0">No Results</span>
+      </div>
 
     </div>
     <div class="col-md-9" ng-switch on="heroIdx || 'null'">
