@@ -4,6 +4,179 @@
 
 var d2botfileControllers = angular.module('d2botfileControllers', []);
 
+d2botfileControllers.controller('BotFileController', ['$rootScope','$scope','$routeParams','heroFactory','botfileFactory',function($rootScope, $scope, $routeParams, heroFactory, botfileFactory) {
+
+  $scope.botfile = "";
+  $scope.heroConfig = [];
+
+  //scope functions
+  $scope.init = function(){
+    heroFactory.get(function(data){
+      for (var i = 0; i < data.heroes.length; i++) {
+        $scope.heroConfig.push(
+          {
+            "name": data.heroes[i].name
+          }
+        );
+      }
+    });
+  };
+
+  //get text from uploaded file
+  $scope.uploadBotfile = function(element){
+     $scope.$apply(function(scope) {
+         var botfile = element.files[0];
+         var reader = new FileReader();
+         reader.onload = function(evt) {
+            $scope.botfile = reader.result;
+            //get value of "Bot" attribute for each hero
+            for(var i = 0; i < $scope.heroConfig.length; i++){
+              $scope.heroConfig[i]["Bot"] = $scope.getAttributeValue($scope.getAttributeValue($scope.botfile,$scope.heroConfig[i].name,true),"Bot",true);
+              //parse "Bot" value for each hero
+              $scope.parseBotValue($scope.heroConfig[i].name,$scope.heroConfig[i].Bot);
+            }
+            //console.log($scope.heroConfig[1].Bot);
+         };
+         reader.readAsText(botfile);
+     });
+  };
+
+  //get value of attribute attr (surrounded by "{ }") that exists in string str
+  //isObj determines whether the value is an object or not
+  //this method returns string, not object
+  $scope.getAttributeValue = function(str, attr, isObj){
+    var search = '\"'+attr+'\"'; //add double quotes
+    if(str.indexOf(search) > -1){ //if attr exists in str
+      var beginIdx = str.indexOf(search) + search.length;
+      var endIdx = -1;
+
+      var braceCounter = 0;
+      var found = false;
+      var currentIdx = beginIdx;
+
+      if(isObj){ //if the value is an object
+        //assume the file is a valid VDF
+        do{
+          if(str.charAt(currentIdx) == '{'){
+            braceCounter++;
+            if(braceCounter == 0){
+              found = true;
+            }
+          }
+          else if(str.charAt(currentIdx) == '}'){
+            braceCounter--;
+            if(braceCounter == 0){
+              found = true;
+            }
+          }
+          currentIdx++;
+        }
+        while(!found);
+
+        endIdx = currentIdx--; //assign the index of the closing brace
+      }
+      else{
+        var quote_count = 0;
+        while(quote_count < 2){
+          if(str.charAt(currentIdx) == '\"'){
+            quote_count++;
+            if(quote_count == 1){
+              beginIdx = currentIdx + 1; //get first character inside quote
+            }
+            else if(quote_count == 2){
+              endIdx = currentIdx - 1; //get last character inside quote
+            }
+          }
+          currentIdx++;
+        }
+      }
+
+      return str.substring(beginIdx,endIdx+1);
+    }
+    else{
+      return "";
+    }
+  }
+
+  //parse acquired "Bot" value to defined JSON format
+  //this is a modified VDF parser, because the Item Loadout has its own handling
+  $scope.parseBotValue = function(hero_name, str){
+
+    //parse "Loadout"
+    var str_loadout = $scope.getAttributeValue(str,"Loadout",true);
+    var loadout = [];
+    if(str_loadout != ""){
+      //get every elements between quotes
+      var array_raw_loadout = str_loadout.match(/"(.*?)"/gm); 
+      for(var i = 0; i < array_raw_loadout.length; i = i + 2){
+        var name = array_raw_loadout[i].replace(/item_|"/gm,"");
+        //quick fix for power treads item name problem
+        if(name == "treads"){
+          name = "power_treads";
+        }
+        var priority = array_raw_loadout[i+1].split(" | ");
+        var sellable = ((priority.length > 1) && (priority[1] == "ITEM_SELLABLE\"") ? true : false);
+        //create new element in loadout array
+        loadout.push(
+          {
+            "name": name,
+            "priority": priority[0].replace(/"/g,""),
+            "sellable": sellable
+          }
+        );
+      }
+    }
+
+    //parse "Build"
+    var str_build = $scope.getAttributeValue(str,"Build",true);
+    var build = ( str_build == "" ? {} : JSON.parse($scope.parseVDF(str_build)) );
+    //parse "HeroType"
+    var str_herotype = $scope.getAttributeValue(str,"HeroType",false);
+    var herotype = ( str_herotype == "" ? "" : $scope.parseVDF(str_herotype) );
+    //parse "LaningInfo"
+    var str_laninginfo = $scope.getAttributeValue(str,"LaningInfo",true);
+    var laninginfo = ( str_laninginfo == "" ? {} : JSON.parse($scope.parseVDF(str_laninginfo)) );
+
+    /*console.log(JSON.stringify(loadout, undefined, 2));
+    console.log(JSON.stringify(build, undefined, 2));
+    console.log(JSON.stringify(herotype, undefined, 2));
+    console.log(JSON.stringify(laninginfo, undefined, 2));*/
+
+    //write to botfileconfig localstorage
+    botfileFactory.setBotLoadout(hero_name,loadout);
+    botfileFactory.setBotBuild(hero_name,build);
+    botfileFactory.setBotHeroType(hero_name,herotype);
+    botfileFactory.setBotLaningInfo(hero_name,laninginfo);
+  };
+
+  //parse a VDF file or part of VDF file into JSON format
+  //credit to https://gist.github.com/AlienHoboken/5571903
+  $scope.parseVDF = function(str){
+    var result = str;
+    //replace open braces
+    var replace = '\"$1\": {';
+    result = result.replace(/"([^"]*)"(\s*){/gm, replace);
+    //replace values
+    replace = '\"$1\": \"$2\",';
+    result = result.replace(/"([^"]*)"\s*"([^"]*)"/gm, replace);
+    //remove trailing commas
+    replace = '$1';
+    result = result.replace(/,(\s*[}\]])/gm, replace);
+    //add commas
+    replace = '$1,$2$3$4';
+    result = result.replace(/([}\]])(\s*)("[^"]*":\s*)?([{\[])/gm, replace);
+    //object as value
+    replace = '},$1';
+    result = result.replace(/}(\s*"[^"]*":)/gm, replace);
+    
+    return result;
+  };
+
+  //fire init function
+  $scope.init();
+
+}]);
+
 d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$routeParams', 'heroFactory', 'itemFactory', 'itemgroupFactory','abilityFactory', 'botfileFactory', function($rootScope, $scope, $routeParams, heroFactory, itemFactory, itemgroupFactory, abilityFactory, botfileFactory) {
 
   //other scope variables
@@ -162,8 +335,8 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
         //iterate through the components
         if($scope.itemreqrecipe.indexOf(item_id) > -1){ //check if the item has a recipe component
           //TODO fix recipe item image looks like the actual item
-          $scope.addLoadoutElement("recipe",targetIdx); //for visual purpose
-          //$scope.addLoadoutElement("recipe_"+item_id,targetIdx); //the true code
+          //$scope.addLoadoutElement("recipe",targetIdx); //for visual purpose
+          $scope.addLoadoutElement("recipe_"+item_id,targetIdx); //the true code
         }
         for(var i = $scope.items[item_id].components.length-1; i >= 0 ; i--){
           $scope.addLoadoutElement($scope.items[item_id].components[i],targetIdx);

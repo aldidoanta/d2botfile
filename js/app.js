@@ -14,7 +14,8 @@ d2botfileApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/create-upload', {
-        templateUrl: 'partials/create-upload.html'
+        templateUrl: 'partials/create-upload.html',
+        controller: 'BotFileController'
       }).
       when('/edit', {
         templateUrl: 'partials/edit-hero-list.html',

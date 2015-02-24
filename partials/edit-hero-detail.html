@@ -14,10 +14,7 @@
 							<img id="{{item.name}}" ng-src="http://cdn.dota2.com/apps/dota2/images/items/{{item.name}}_lg.png" title="{{items[item.name].dname}}" height="39px" width="51px">
 						</td>
 						<td class="itemLoadoutCell">
-							<select>
-								<option ng-repeat="elmt in setPriorityOptions(item.priority)" ng-model="item.priority" ng-value="elmt">
-									{{elmt}}
-								</option>
+							<select ng-model="item.priority" ng-options="elmt for elmt in setPriorityOptions(item.priority)" ng-value="elmt">
 							</select>
 						</td>
 						<td class="itemLoadoutCell"><input type="checkbox" ng-model="item.sellable">Sellable</td>

@@ -19,10 +19,10 @@
       </div>
 
     </div>
-    <div class="col-md-9" ng-switch on="heroIdx || 'null'">
+    <div class="col-md-9">
       <!--edit-hero-detail body content-->
-      <div ng-switch-when="null">Select the hero you want to edit from the list on the left side</div>
-      <div ng-switch-default><div ng-include="'partials/edit-hero-detail.html'"></div></div>
+      <div ng-hide="heroIdx != null">Select the hero you want to edit from the list on the left side</div>
+      <div ng-hide="heroIdx == null"><div ng-include="'partials/edit-hero-detail.html'"></div></div>
     </div>
   </div>
 </div>
