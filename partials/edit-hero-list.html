@@ -5,12 +5,13 @@
       <!-- search sidebar -->
       <div class="form-group">
         <div>
-          Search: <input ng-model="heroQuery" placeholder="Search Hero">
+          Search: <input ng-model="heroQuery.localized_name" placeholder="Search Hero">
         </div>
       </div>
 
       <ul class="myList list-group">
         <li class="list-group-item" ng-repeat="hero in heroes | filter:heroQuery | orderBy:orderHero">
+          <img ng-src="http://cdn.dota2.com/apps/dota2/images/heroes/{{removeHeroPrefix(hero.name)}}_sb.png" onError="this.onError = null; this.src='img/default/hero.png'" width="59px" height="33px">
           <a href="#/edit/{{heroes.indexOf(hero)}}"><span style="color:#000000">{{hero.localized_name}}</span></a>
         </li>
       </ul>

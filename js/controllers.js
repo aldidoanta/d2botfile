@@ -4,6 +4,7 @@
 
 var d2botfileControllers = angular.module('d2botfileControllers', []);
 
+//controller for VDF to JSON data conversion
 d2botfileControllers.controller('BotFileController', ['$rootScope','$scope','$routeParams','heroFactory','botfileFactory',function($rootScope, $scope, $routeParams, heroFactory, botfileFactory) {
 
   $scope.botfile = "";
@@ -35,7 +36,6 @@ d2botfileControllers.controller('BotFileController', ['$rootScope','$scope','$ro
               //parse "Bot" value for each hero
               $scope.parseBotValue($scope.heroConfig[i].name,$scope.heroConfig[i].Bot);
             }
-            //console.log($scope.heroConfig[1].Bot);
          };
          reader.readAsText(botfile);
      });
@@ -45,9 +45,12 @@ d2botfileControllers.controller('BotFileController', ['$rootScope','$scope','$ro
   //isObj determines whether the value is an object or not
   //this method returns string, not object
   $scope.getAttributeValue = function(str, attr, isObj){
-    var search = '\"'+attr+'\"'; //add double quotes
-    if(str.indexOf(search) > -1){ //if attr exists in str
-      var beginIdx = str.indexOf(search) + search.length;
+    var searchAttr = '\"'+attr+'\"'; //add double quotes
+    var regex_obj = new RegExp("\""+attr+"\"\\s*{", "gm");
+    var regex_nonobj = new RegExp("\""+attr+"\"\\s*", "gm")
+    var searchIdx = (isObj ? str.search(regex_obj) : str.search(regex_nonobj)); //use regex based on isObj value
+    if(searchIdx > -1){
+      var beginIdx = searchIdx + searchAttr.length;
       var endIdx = -1;
 
       var braceCounter = 0;
@@ -58,6 +61,9 @@ d2botfileControllers.controller('BotFileController', ['$rootScope','$scope','$ro
         //assume the file is a valid VDF
         do{
           if(str.charAt(currentIdx) == '{'){
+            if(braceCounter == 0){ //check the first open brace
+              beginIdx = currentIdx;
+            }
             braceCounter++;
             if(braceCounter == 0){
               found = true;
@@ -167,7 +173,7 @@ d2botfileControllers.controller('BotFileController', ['$rootScope','$scope','$ro
     result = result.replace(/([}\]])(\s*)("[^"]*":\s*)?([{\[])/gm, replace);
     //object as value
     replace = '},$1';
-    result = result.replace(/}(\s*"[^"]*":)/gm, replace);
+    result = result.replace(/}(\s*"[^"]*":)/gm, replace); //"
     
     return result;
   };
@@ -177,6 +183,7 @@ d2botfileControllers.controller('BotFileController', ['$rootScope','$scope','$ro
 
 }]);
 
+//controller for hero editor
 d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$routeParams', 'heroFactory', 'itemFactory', 'itemgroupFactory','abilityFactory', 'botfileFactory', function($rootScope, $scope, $routeParams, heroFactory, itemFactory, itemgroupFactory, abilityFactory, botfileFactory) {
 
   //other scope variables
@@ -188,7 +195,6 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
   $scope.invokerHeroIdx = 72; 
   $scope.abilityNumber = 4;
   $scope.levelNumber = 25;
-  $scope.selected = false;
 
   $scope.loadout = [
     //seed data
@@ -294,6 +300,22 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     return newString;
   };
 
+  //remove "npc_dota_hero_" prefix in hero name
+  $scope.removeHeroPrefix = function(hero_name){
+    return (hero_name.replace("npc_dota_hero_",""));
+  };
+
+  //switch selected value (for ability build)
+  $scope.switchSelected = function(evt){
+    //check if className "selected" exists
+    if(evt.target.className.indexOf("selected") > -1){
+      evt.target.className = evt.target.className.replace("selected",""); //remove "selected"
+    }
+    else{
+     evt.target.className += " selected"; //add "selected"
+    }
+  };
+
   //search if an array of object contains a specific key-value pair
   $scope.isValueInArrObj = function(array,key,value){
     var result = array.filter(function(obj){
@@ -302,7 +324,7 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
     var found = result.length > 0 ? true : false;
 
     return found;
-  }
+  };
 
   //add item loadout element
   $scope.addLoadoutElement = function(item_id,targetIdx){
@@ -355,7 +377,7 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
         $scope.$apply();
       }
     }
-  }
+  };
 
   //set the options for item loadout element's priority
   $scope.setPriorityOptions = function(defaultPriority){
@@ -415,7 +437,7 @@ d2botfileControllers.controller('EditHeroController', ['$rootScope','$scope', '$
             break;
           case "attribute_bonus":
             document.getElementById("a5"+"lv"+level).className += " selected";
-              break;
+            break;
         }
       } 
     }

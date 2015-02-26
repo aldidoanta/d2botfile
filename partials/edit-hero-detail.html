@@ -26,7 +26,7 @@
 		<div class="itemList">
 			<div class="form-group">
 		        <div>
-		          Search: <input ng-model="itemQuery" placeholder="Search Item">
+		          Search: <input ng-model="itemQuery.dname" placeholder="Search Item">
 		        </div>
 	    	</div>
 
@@ -63,7 +63,7 @@
 						<td class="abilityIcon" align="center">
 							<img ng-src="http://cdn.dota2.com/apps/dota2/images/abilities/{{hero.abilities[$index]}}_md.png" onError="this.onError = null; this.src='img/default/ability.png'">
 						</td>
-						<td ng-repeat="levelIdx in range(levelNumber) track by $index" ng-click="selected = !selected" ng-class="{'selected': selected}" id="a{{$parent.$index+1}}lv{{$index+1}}" class = "abilityCell">{{$index+1}}</td>
+						<td ng-repeat="levelIdx in range(levelNumber) track by $index" ng-click="switchSelected($event)" id="a{{$parent.$index+1}}lv{{$index+1}}" class = "abilityCell">{{$index+1}}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -74,9 +74,9 @@
 				<tbody>
 					<tr>
 						<td class="abilityIcon" align="center">
-							<img ng-src="http://cdn.dota2.com/apps/dota2/images/workshop/itembuilder/stats.png" height='64' width='64'>
+							<img ng-src="http://cdn.dota2.com/apps/dota2/images/workshop/itembuilder/stats.png" height="64px" width="64px">
 						</td>
-						<td ng-repeat="levelIdx in range(levelNumber) track by $index" ng-click="selected = !selected" ng-class="{'selected': selected}" id="a5lv{{$index+1}}" class = "abilityCell">{{$index+1}}</td>
+						<td ng-repeat="levelIdx in range(levelNumber) track by $index" ng-click="switchSelected($event)" id="a5lv{{$index+1}}" class = "abilityCell">{{$index+1}}</td>
 					</tr>
 				</tbody>
 			</table>
