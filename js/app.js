@@ -26,7 +26,8 @@ d2botfileApp.config(['$routeProvider',
         controller: 'EditHeroController'
       }).
       when('/download', {
-        templateUrl: 'partials/download.html'
+        templateUrl: 'partials/download.html',
+        controller: 'BotFileController'
       }).
       when('/about', {
         templateUrl: 'partials/about.html'

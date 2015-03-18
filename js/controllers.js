@@ -178,6 +178,106 @@ d2botfileControllers.controller('BotFileController', ['$rootScope','$scope','$ro
     return result;
   };
 
+  //convert predefined JSON object type to VDF
+  $scope.toVDF = function(json,type){
+    var result = "";
+    switch(type){
+      case "loadout":{
+        result += "\"Loadout\"\n"
+                  +"{\n";
+        for(var i = 0; i < json.length; i++){
+          result += "\t\"item_"+json[i].name+"\"\t\t\""+json[i].priority;
+          if(json[i].sellable){
+            result += " | ITEM_SELLABLE\"\n";
+          }
+          else{
+            result += "\"\n";
+          }
+        }
+        result += "}\n";
+        break;
+      }
+      case "build":{
+        result = "\"Build\"\n"
+                +"{\n"
+                +"\t\"1\"\t\t\""+json["1"]+"\"\n"
+                +"\t\"2\"\t\t\""+json["2"]+"\"\n"
+                +"\t\"3\"\t\t\""+json["3"]+"\"\n"
+                +"\t\"4\"\t\t\""+json["4"]+"\"\n"
+                +"\t\"5\"\t\t\""+json["5"]+"\"\n"
+                +"\t\"6\"\t\t\""+json["6"]+"\"\n"
+                +"\t\"7\"\t\t\""+json["7"]+"\"\n"
+                +"\t\"8\"\t\t\""+json["8"]+"\"\n"
+                +"\t\"9\"\t\t\""+json["9"]+"\"\n"
+                +"\t\"10\"\t\""+json["10"]+"\"\n"
+                +"\t\"11\"\t\""+json["11"]+"\"\n"
+                +"\t\"12\"\t\""+json["12"]+"\"\n"
+                +"\t\"13\"\t\""+json["13"]+"\"\n"
+                +"\t\"14\"\t\""+json["14"]+"\"\n"
+                +"\t\"15\"\t\""+json["15"]+"\"\n"
+                +"\t\"16\"\t\""+json["16"]+"\"\n"
+                +"\t\"17\"\t\""+json["17"]+"\"\n"
+                +"\t\"18\"\t\""+json["18"]+"\"\n"
+                +"\t\"19\"\t\""+json["19"]+"\"\n"
+                +"\t\"20\"\t\""+json["20"]+"\"\n"
+                +"\t\"21\"\t\""+json["21"]+"\"\n"
+                +"\t\"22\"\t\""+json["22"]+"\"\n"
+                +"\t\"23\"\t\""+json["23"]+"\"\n"
+                +"\t\"24\"\t\""+json["24"]+"\"\n"
+                +"\t\"25\"\t\""+json["25"]+"\"\n"
+                +"}\n";
+        break;
+      }
+      case "herotype":{
+        result = "\"HeroType\"\t\t\t\""+json+"\"\n";
+        break;
+      }
+      case "laninginfo":{
+        result = "\"LaningInfo\"\n"
+                +"{\n"
+                +"\t\"SoloDesire\"\t\t\t\""+json.SoloDesire+"\"\n"
+                +"\t\"RequiresBabysit\"\t\t\""+json.RequiresBabysit+"\"\n"
+                +"\t\"ProvidesBabysit\"\t\t\""+json.ProvidesBabysit+"\"\n"
+                +"\t\"SurvivalRating\"\t\t\""+json.SurvivalRating+"\"\n"
+                +"\t\"RequiresFarm\"\t\t\t\""+json.RequiresFarm+"\"\n"
+                +"\t\"ProvidesSetup\"\t\t\t\""+json.ProvidesSetup+"\"\n"
+                +"\t\"RequiresSetup\"\t\t\t\""+json.RequiresSetup+"\"\n"
+                +"}\n";
+        break;
+      }
+    }
+    return result;
+  };
+
+  //download the edited botfile into user's local machine
+  $scope.downloadBotFile = function(){
+    var botfileConfig = botfileFactory.getBotfileConfig();
+    for(var hero in botfileConfig){
+
+      var loadout = botfileConfig[hero].Bot.Loadout;
+      var build = botfileConfig[hero].Bot.Build;
+      var herotype = botfileConfig[hero].Bot.HeroType;
+      var laninginfo = botfileConfig[hero].Bot.LaningInfo;
+      var result = ""; //the modified npc_heroes.txt string
+      console.log(hero+":\n");
+      if(loadout.length > 0){ //check if the loadout array is not empty
+        result += $scope.toVDF(loadout, "loadout");
+      }
+      if(build.hasOwnProperty("1")){ //just check for one of the attributes
+        result += $scope.toVDF(build, "build");
+      }
+      if(herotype != ""){
+        result += $scope.toVDF(herotype, "herotype");
+      }
+      if(laninginfo.hasOwnProperty("SoloDesire")){ //just check for one of the attributes
+        result += $scope.toVDF(laninginfo, "laninginfo");
+      }
+      //TODO insert the VDF into npc_heroes.txt
+      console.log(result+"\n");
+    }
+  };
+
+
   //fire init function
   $scope.init();
 
