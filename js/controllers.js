@@ -30,6 +30,7 @@ d2botfileControllers.controller('BotFileController', ['$rootScope','$scope','$ro
          var reader = new FileReader();
          reader.onload = function(evt) {
             $scope.botfile = reader.result;
+            botfileFactory.setRawBotfile($scope.botfile); //store to localstorage
             //get value of "Bot" attribute for each hero
             for(var i = 0; i < $scope.heroConfig.length; i++){
               $scope.heroConfig[i]["Bot"] = $scope.getAttributeValue($scope.getAttributeValue($scope.botfile,$scope.heroConfig[i].name,true),"Bot",true);
@@ -252,6 +253,7 @@ d2botfileControllers.controller('BotFileController', ['$rootScope','$scope','$ro
   //download the edited botfile into user's local machine
   $scope.downloadBotFile = function(){
     var botfileConfig = botfileFactory.getBotfileConfig();
+    var raw = botfileFactory.getRawBotfile(); //get raw botfile
     for(var hero in botfileConfig){
 
       var loadout = botfileConfig[hero].Bot.Loadout;
@@ -259,7 +261,7 @@ d2botfileControllers.controller('BotFileController', ['$rootScope','$scope','$ro
       var herotype = botfileConfig[hero].Bot.HeroType;
       var laninginfo = botfileConfig[hero].Bot.LaningInfo;
       var result = ""; //the modified npc_heroes.txt string
-      console.log(hero+":\n");
+      //console.log(hero+":\n");
       if(loadout.length > 0){ //check if the loadout array is not empty
         result += $scope.toVDF(loadout, "loadout");
       }
@@ -272,9 +274,34 @@ d2botfileControllers.controller('BotFileController', ['$rootScope','$scope','$ro
       if(laninginfo.hasOwnProperty("SoloDesire")){ //just check for one of the attributes
         result += $scope.toVDF(laninginfo, "laninginfo");
       }
-      //TODO insert the VDF into npc_heroes.txt
-      console.log(result+"\n");
+      //test - replace the old hero config with the new one
+      var newConfig = "{\n"+result+"\n}";
+      var heroConfig = $scope.getAttributeValue(raw,hero,true);
+
+      var replacedConfig = $scope.getAttributeValue(heroConfig,"Bot",true);
+      if(replacedConfig != ""){
+        raw = raw.replace(replacedConfig,newConfig);
+        //replacedConfig = $scope.getAttributeValue(heroConfig,"Bot",true);
+        //console.log(replacedConfig);
+      }
+      else{
+        //TODO insert the botfile config, even when the previous config has not existed yet
+      }
     }
+    botfileFactory.setRawBotfile(raw); //set raw botfile
+    //download the botfile
+    var array = [raw];
+    var blob = new Blob(array, {type: 'text/plain'});
+    var url = window.URL.createObjectURL(blob);
+    var filename = "npc_heroes.txt";
+    var a = document.createElement("a");
+
+    document.body.appendChild(a);
+    a.style = "display: none";
+    a.href = url;
+    a.download = filename;
+    a.click();
+    window.URL.revokeObjectURL(blob);
   };
 
 

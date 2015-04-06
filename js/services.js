@@ -44,6 +44,10 @@ d2botfileServices.factory('botfileFactory', ['heroFactory', function(heroFactory
     });
 
 	return {
+		getRawBotfile : function(){
+			var storage_rawBotfile = localStorage.getItem("rawBotfile");
+			return storage_rawBotfile;
+		},
 		getBotfileConfig : function(){
 			var storage_botfileConfig = JSON.parse(localStorage.getItem("botfileConfig"));;
 			// return botfileConfig;
@@ -68,6 +72,10 @@ d2botfileServices.factory('botfileFactory', ['heroFactory', function(heroFactory
 			var storage_botfileConfig = JSON.parse(localStorage.getItem("botfileConfig"));
 			// return botfileConfig[hero_name].Bot.LaningInfo;
 			return storage_botfileConfig[hero_name].Bot.LaningInfo;
+		},
+		setRawBotfile : function(rawdata){
+			localStorage.setItem("rawBotfile",rawdata);
+			return rawdata;
 		},
 		setBotLoadout : function(hero_name, data){
 			var storage_botfileConfig = JSON.parse(localStorage.getItem("botfileConfig"));
